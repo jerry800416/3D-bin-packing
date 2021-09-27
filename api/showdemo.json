@@ -1,0 +1,1692 @@
+{
+  "Success": true,
+  "data": {
+    "box": {
+      "WHD": [
+        560,
+        244,
+        259
+      ],
+      "color": "",
+      "partNumber": "Bin",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotationType": 0,
+      "type": "bin",
+      "weight": 28080
+    },
+    "fitItem": [
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner0",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner1",
+        "position": [
+          0,
+          0,
+          244
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner2",
+        "position": [
+          0,
+          229,
+          244
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner3",
+        "position": [
+          0,
+          229,
+          0
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner4",
+        "position": [
+          545,
+          229,
+          0
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner5",
+        "position": [
+          545,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner6",
+        "position": [
+          545,
+          0,
+          244
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          15,
+          15,
+          15
+        ],
+        "color": "black",
+        "partNumber": "corner7",
+        "position": [
+          545,
+          229,
+          244
+        ],
+        "rotationType": 0,
+        "type": "corner",
+        "weight": 0
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet1",
+        "position": [
+          15,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet2",
+        "position": [
+          75,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet3",
+        "position": [
+          135,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet4",
+        "position": [
+          195,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet5",
+        "position": [
+          255,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet6",
+        "position": [
+          315,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet7",
+        "position": [
+          375,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet8",
+        "position": [
+          435,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet9",
+        "position": [
+          0,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet10",
+        "position": [
+          60,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet11",
+        "position": [
+          120,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet12",
+        "position": [
+          180,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet13",
+        "position": [
+          240,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet14",
+        "position": [
+          300,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          60,
+          80,
+          200
+        ],
+        "color": "brown",
+        "partNumber": "Cabinet15",
+        "position": [
+          360,
+          80,
+          0
+        ],
+        "rotationType": 0,
+        "type": "cabint",
+        "weight": 80
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal1",
+        "position": [
+          0,
+          0,
+          495
+        ],
+        "rotationType": 3,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal2",
+        "position": [
+          15,
+          160,
+          0
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal3",
+        "position": [
+          185,
+          160,
+          0
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal4",
+        "position": [
+          355,
+          160,
+          0
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal5",
+        "position": [
+          15,
+          0,
+          200
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal6",
+        "position": [
+          185,
+          0,
+          200
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal7",
+        "position": [
+          355,
+          0,
+          200
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal8",
+        "position": [
+          0,
+          82,
+          200
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal9",
+        "position": [
+          170,
+          82,
+          200
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal10",
+        "position": [
+          340,
+          82,
+          200
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal11",
+        "position": [
+          0,
+          160,
+          46
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal12",
+        "position": [
+          170,
+          160,
+          46
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal13",
+        "position": [
+          340,
+          160,
+          46
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal14",
+        "position": [
+          46,
+          82,
+          510
+        ],
+        "rotationType": 3,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          170,
+          82,
+          46
+        ],
+        "color": "red",
+        "partNumber": "Dyson DC34 Animal15",
+        "position": [
+          0,
+          160,
+          92
+        ],
+        "rotationType": 0,
+        "type": "Dyson",
+        "weight": 85
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash1",
+        "position": [
+          170,
+          160,
+          92
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash2",
+        "position": [
+          255,
+          160,
+          92
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash3",
+        "position": [
+          340,
+          160,
+          92
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash4",
+        "position": [
+          420,
+          82,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash5",
+        "position": [
+          420,
+          82,
+          60
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash6",
+        "position": [
+          425,
+          142,
+          92
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash7",
+        "position": [
+          0,
+          160,
+          138
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash8",
+        "position": [
+          85,
+          160,
+          138
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash9",
+        "position": [
+          420,
+          82,
+          120
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server1",
+        "position": [
+          164,
+          0,
+          198
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server2",
+        "position": [
+          164,
+          100,
+          198
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server3",
+        "position": [
+          160,
+          170,
+          152
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server4",
+        "position": [
+          164,
+          200,
+          182
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server5",
+        "position": [
+          160,
+          270,
+          152
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server6",
+        "position": [
+          164,
+          300,
+          182
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server7",
+        "position": [
+          160,
+          370,
+          152
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server8",
+        "position": [
+          164,
+          400,
+          182
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server9",
+        "position": [
+          46,
+          510,
+          164
+        ],
+        "rotationType": 4,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server10",
+        "position": [
+          164,
+          15,
+          228
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server11",
+        "position": [
+          164,
+          115,
+          228
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server12",
+        "position": [
+          164,
+          215,
+          212
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server13",
+        "position": [
+          164,
+          315,
+          212
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server14",
+        "position": [
+          164,
+          415,
+          212
+        ],
+        "rotationType": 1,
+        "type": "server",
+        "weight": 20
+      }
+    ],
+    "unfitItem": [
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash10",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash11",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash12",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash13",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash14",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash15",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash16",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash17",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          85,
+          60,
+          60
+        ],
+        "color": "yellow",
+        "partNumber": "wash18",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 0,
+        "type": "wash",
+        "weight": 10
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server15",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server16",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server17",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server18",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server19",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server20",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server21",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server22",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server23",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server24",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server25",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server26",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server27",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server28",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server29",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server30",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server31",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server32",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server33",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server34",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server35",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server36",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server37",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server38",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server39",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server40",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server41",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      },
+      {
+        "WHD": [
+          70,
+          100,
+          30
+        ],
+        "color": "blue",
+        "partNumber": "Server42",
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotationType": 5,
+        "type": "server",
+        "weight": 20
+      }
+    ]
+  }
+}
