@@ -9,7 +9,7 @@
 1. fix item float on air :
     - ```[fix_point = False/True]``` The original packaging method did not consider the gravity problem. After the packaging was completed, there were items floating in the air, which greatly reduced the space utilization of the box. I solved this problem and improved the boxing rate.
 
-original packaging method  |  used fix point function
+Original packaging  |  Used fix point
 :-------------------------:|:-------------------------:
 <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/1.jpg" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/2.jpg" width="400"/>
 
