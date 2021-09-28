@@ -3,9 +3,15 @@
 
 3D Bin Packing improvements based on [this repository](https://github.com/enzoruiz/3dbinpacking). 
 
+<img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/3.jpeg" width="600"/>
+
 ## improvement
 1. fix item float on air :
     - ```[fix_point = False/True]``` The original packaging method did not consider the gravity problem. After the packaging was completed, there were items floating in the air, which greatly reduced the space utilization of the box. I solved this problem and improved the boxing rate.
+
+original packaging method  |  used fix point function
+:-------------------------:|:-------------------------:
+<img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/1.jpg" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/2.jpg" width="400"/>
 
 2. Item bearing problem :
     - ```[loadbear = X]``` 
@@ -28,7 +34,7 @@ The original method did not consider the problem of project load-bearing, becaus
 
 ## How to use
 
-init bin : 
+Init bin : 
 ```
 box1 = Bin(
     name='Bin',           # name / PN of item (unique value)
@@ -37,7 +43,7 @@ box1 = Bin(
     corner=15             # container coner
     )
 ```
-init item : 
+Init item : 
 ```
 item1 = Item(
         name='testItem',   # name / PN of item (unique value)
@@ -50,16 +56,16 @@ item1 = Item(
         color='#FFFF37'    # set item color , you also can use color='red' 
     )
 ```
-init packer : 
+Init packer : 
 ```
 packer = Packer()          # packer init
 ```
-add bin and items to packer : 
+Add bin and items to packer : 
 ```
 packer.add_bin(box1)       # adding bins to packer
 packer.add_item(item1)     # adding items to packer
 ```
-start pack items : 
+Start pack items : 
 ```
 packer.pack(
     bigger_first=True,                 # bigger item first
@@ -170,8 +176,6 @@ painter.plotBoxAndItems()
 
 ## Reference
 
-* https://github.com/bom-d-van/binpacking
-* https://github.com/gedex/bp3d
 * [Optimizing three-dimensional bin packing through simulation](https://github.com/jerry800416/3dbinpacking/blob/master/reference/OPTIMIZING%20THREE-DIMENSIONAL%20BIN%20PACKING%20THROUGH%20SIMULATION.pdf)
 * https://github.com/enzoruiz/3dbinpacking
 * https://github.com/nmingotti/3dbinpacking
