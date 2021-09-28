@@ -172,6 +172,6 @@ painter.plotBoxAndItems()
 
 * https://github.com/bom-d-van/binpacking
 * https://github.com/gedex/bp3d
-* [Optimizing three-dimensional bin packing through simulation](reference/OPTIMIZING THREE-DIMENSIONAL BIN PACKING THROUGH SIMULATION.pdf)
+* [Optimizing three-dimensional bin packing through simulation](https://github.com/jerry800416/3dbinpacking/blob/master/reference/OPTIMIZING%20THREE-DIMENSIONAL%20BIN%20PACKING%20THROUGH%20SIMULATION.pdf)
 * https://github.com/enzoruiz/3dbinpacking
 * https://github.com/nmingotti/3dbinpacking
