@@ -1,4 +1,4 @@
-**簡要描述：**
+## 簡要描述：
 
 - <p>DEMO</p>
 
@@ -7,18 +7,18 @@
 
 - 外部 `  `
 
-**請求方式：**
+## 請求方式：
 - GET
 
 
- **入參實例**
+## 入參實例 :
 無
 
-**入參說明：**
+## 入參說明：
 無
 
 ---
- **出參實例1**
+ ## 出參實例1
 
 出參
 ```
@@ -78,10 +78,10 @@
 ```
 
 ----------------------------------------------
-**出參說明：**
+## 出參說明：
 
 |參數名|類型|說明|詳細|
-|:-----  |:-----|-----                           |
+|:-----  |:-----|:----- |:----- |
 |Success | bool  | 呼叫API成功或失敗 |true 代表入參正確且系統正常運作，false 代表入參錯誤或是系統問題 |
 |data |Object   |前端需要的詳細訊息 |包含box,fitItem,unfitItem |
 |**box** | **Array**  |**貨櫃資訊** |**包含WHD,position,partNumber,weight**|
@@ -99,6 +99,6 @@
 |weight | int  |物品重量 |單位為公斤 |
 
 
- **備註**
-unfitItem 參數和 fitItem 相同
-unfitItem 裡面的 position 和 rotationType 無作用
+ ## 備註
+- unfitItem 參數和 fitItem 相同
+- unfitItem 裡面的 position 和 rotationType 無作用
