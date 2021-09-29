@@ -13,7 +13,7 @@ app = flask.Flask(__name__)
 def hello():
 
     hello_world = '''
-    welcome to face 3D packing prob API_1.0
+    welcome to 3D packing prob API_1.0
     '''
     return hello_world
 
@@ -57,9 +57,10 @@ def mkResultAPI():
 
 
 def makeDictBox(box):
+    position = (int(box.width)/2,int(box.height)/2,int(box.depth)/2)
     r = {
             "partNumber" : box.name,
-            "position" : (0,0,0),
+            "position" : position,
             "WHD" : (int(box.width),int(box.height),int(box.depth)),
             "weight" : int(box.max_weight)
         }
@@ -68,18 +69,25 @@ def makeDictBox(box):
 
 def makeDictItem(item):
     ''' '''
+
     if item.rotation_type == 0:
-        pos = (int(item.position[0]),int(item.position[1]),int(item.position[2]))
+        pos = (int(item.position[0]) + int(item.width)//2,int(item.position[1])+ int(item.height)//2,int(item.position[2])+ int(item.depth)//2)
+        whd = (int(item.width),int(item.height),int(item.depth))
     elif item.rotation_type == 1:
-        pos = (int(item.position[1]),int(item.position[0]),int(item.position[2]))
+        pos = (int(item.position[0])+ int(item.height)//2,int(item.position[1]) + int(item.width)//2,int(item.position[2])+ int(item.depth)//2)
+        whd = (int(item.height),int(item.width),int(item.depth))
     elif item.rotation_type == 2:
-        pos = (int(item.position[1]),int(item.position[2]),int(item.position[0]))
+        pos = (int(item.position[0])+ int(item.height)//2,int(item.position[1])+ int(item.depth)//2,int(item.position[2]) + int(item.width)//2)
+        whd = (int(item.height),int(item.depth),int(item.width))
     elif item.rotation_type == 3:
-        pos = (int(item.position[2]),int(item.position[1]),int(item.position[0]))
+        pos = (int(item.position[0])+ int(item.depth)//2,int(item.position[1])+ int(item.height)//2,int(item.position[2]) + int(item.width)//2)
+        whd = (int(item.depth),int(item.height),int(item.width))
     elif item.rotation_type == 4:
-        pos = (int(item.position[2]),int(item.position[0]),int(item.position[1]))
+        pos = (int(item.position[0])+ int(item.depth)//2,int(item.position[1]) + int(item.width)//2,int(item.position[2])+ int(item.height)//2)
+        whd = (int(item.depth),int(item.width),int(item.height))
     elif item.rotation_type == 5:
-        pos = (int(item.position[0]),int(item.position[2]),int(item.position[1]))
+        pos = (int(item.position[0]) + int(item.width)//2,int(item.position[1])+ int(item.depth)//2,int(item.position[2])+ int(item.height)//2)
+        whd = (int(item.width),int(item.depth),int(item.height))
     
     r = {
         "partNumber" : item.name,
@@ -87,7 +95,7 @@ def makeDictItem(item):
         "color" : item.color,
         "position" : pos,
         "rotationType" : item.rotation_type,
-        "WHD" : (int(item.width),int(item.height),int(item.depth)),
+        "WHD" : whd,
         "weight" : int(item.weight)
     }
 
@@ -99,12 +107,12 @@ def makeBoxAndItem():
     # init packer , bin
     packer = Packer()
     # 長榮海運真實貨櫃(二十呎鋼製乾貨貨櫃) 單位 公分/公斤
-    box = Bin(name='Bin',WHD=(560,244,259),max_weight=28080,corner=15)
+    box = Bin(name='Bin',WHD=(590,244,260),max_weight=28080,corner=15)
     packer.add_bin(box)
 
     # 一台 dyson DC34 為20.5 * 11.5 * 32.2 (1.33kg)
     # 一箱 假設為64個 , 為 82 * 46 * 170 (85.12)
-    for i in range(15): 
+    for i in range(7): 
         packer.add_item(Item(
             name='Dyson DC34 Animal{}'.format(str(i+1)),
             typeof='Dyson', 
@@ -115,7 +123,7 @@ def makeBoxAndItem():
             updown=True,
             color='#FF0000')
         )
-
+    
     # 洗衣機 一箱一個 850 * 600 *600 (10 kG)
     for i in range(18):
         packer.add_item(Item(
@@ -154,6 +162,7 @@ def makeBoxAndItem():
             updown=True,
             color='#0000E3')
         )
+    
     
     return packer,box
 
