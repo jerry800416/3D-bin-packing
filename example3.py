@@ -15,12 +15,12 @@ packer = Packer()
 box = Bin('Bin', (6, 1, 5), 100,0)
 #  add item
 # Item('item name', (W,H,D), Weight, Packing Priority level, load bear, Upside down or not , 'item color')
-packer.add_bin(box)
-packer.add_item(Item(name='Box-1',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='yellow'))
-packer.add_item(Item(name='Box-2',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='pink'))
-packer.add_item(Item(name='Box-3',typeof='test', WHD=(2, 1, 3), weight=1,level= 1,loadbear=100, updown=True, color='brown'))
-packer.add_item(Item(name='Box-4',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='cyan'))
-packer.add_item(Item(name='Box-5',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='olive'))
+packer.addBin(box)
+packer.addItem(Item(name='Box-1',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='yellow'))
+packer.addItem(Item(name='Box-2',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='pink'))
+packer.addItem(Item(name='Box-3',typeof='test', WHD=(2, 1, 3), weight=1,level= 1,loadbear=100, updown=True, color='brown'))
+packer.addItem(Item(name='Box-4',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='cyan'))
+packer.addItem(Item(name='Box-5',typeof='test', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='olive'))
 
 # calculate packing 
 packer.pack(bigger_first=True,distribute_items=False,fix_point=True,number_of_decimals=0)

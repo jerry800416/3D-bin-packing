@@ -2,9 +2,9 @@ from decimal import Decimal
 from .constants import Axis
 
 
-def rect_intersect(item1, item2, x, y):
-    d1 = item1.get_dimension()
-    d2 = item2.get_dimension()
+def rectIntersect(item1, item2, x, y):
+    d1 = item1.getDimension()
+    d2 = item2.getDimension()
 
     cx1 = item1.position[x] + d1[x]/2
     cy1 = item1.position[y] + d1[y]/2
@@ -19,17 +19,17 @@ def rect_intersect(item1, item2, x, y):
 
 def intersect(item1, item2):
     return (
-        rect_intersect(item1, item2, Axis.WIDTH, Axis.HEIGHT) and
-        rect_intersect(item1, item2, Axis.HEIGHT, Axis.DEPTH) and
-        rect_intersect(item1, item2, Axis.WIDTH, Axis.DEPTH)
+        rectIntersect(item1, item2, Axis.WIDTH, Axis.HEIGHT) and
+        rectIntersect(item1, item2, Axis.HEIGHT, Axis.DEPTH) and
+        rectIntersect(item1, item2, Axis.WIDTH, Axis.DEPTH)
     )
 
 
-def get_limit_number_of_decimals(number_of_decimals):
+def getLimitNumberOfDecimals(number_of_decimals):
     return Decimal('1.{}'.format('0' * number_of_decimals))
 
 
-def set_to_decimal(value, number_of_decimals=0):
-    number_of_decimals = get_limit_number_of_decimals(number_of_decimals)
+def set2Decimal(value, number_of_decimals=0):
+    number_of_decimals = getLimitNumberOfDecimals(number_of_decimals)
 
     return Decimal(value).quantize(number_of_decimals)

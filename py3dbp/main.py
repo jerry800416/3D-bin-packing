@@ -1,5 +1,5 @@
 from .constants import RotationType, Axis
-from .auxiliary_methods import intersect, set_to_decimal
+from .auxiliary_methods import intersect, set2Decimal
 import numpy as np
 # required to plot a representation of Bin and contained items 
 from matplotlib.patches import Rectangle
@@ -31,30 +31,30 @@ class Item:
         self.position = START_POSITION
         self.number_of_decimals = DEFAULT_NUMBER_OF_DECIMALS
 
-    def format_numbers(self, number_of_decimals):
-        self.width = set_to_decimal(self.width, number_of_decimals)
-        self.height = set_to_decimal(self.height, number_of_decimals)
-        self.depth = set_to_decimal(self.depth, number_of_decimals)
-        self.weight = set_to_decimal(self.weight, number_of_decimals)
+    def formatNumbers(self, number_of_decimals):
+        self.width = set2Decimal(self.width, number_of_decimals)
+        self.height = set2Decimal(self.height, number_of_decimals)
+        self.depth = set2Decimal(self.depth, number_of_decimals)
+        self.weight = set2Decimal(self.weight, number_of_decimals)
         self.number_of_decimals = number_of_decimals
 
     def string(self):
         return "%s(%sx%sx%s, weight: %s) pos(%s) rt(%s) vol(%s)" % (
             self.name, self.width, self.height, self.depth, self.weight,
-            self.position, self.rotation_type, self.get_volume()
+            self.position, self.rotation_type, self.getVolume()
         )
 
-    def get_volume(self):
-        return set_to_decimal(self.width * self.height * self.depth, self.number_of_decimals)
+    def getVolume(self):
+        return set2Decimal(self.width * self.height * self.depth, self.number_of_decimals)
 
-    def get_max_area(self):
+    def getMaxArea(self):
         '''
         '''
         a = sorted([self.width,self.height,self.depth],reverse=True) if self.updown == True else [self.width,self.height,self.depth]
     
-        return set_to_decimal(a[0] * a[1] , self.number_of_decimals)
+        return set2Decimal(a[0] * a[1] , self.number_of_decimals)
 
-    def get_dimension(self):
+    def getDimension(self):
         if self.rotation_type == RotationType.RT_WHD:
             dimension = [self.width, self.height, self.depth]
         elif self.rotation_type == RotationType.RT_HWD:
@@ -87,33 +87,33 @@ class Bin:
         self.number_of_decimals = DEFAULT_NUMBER_OF_DECIMALS
         self.fix_point = False
 
-    def format_numbers(self, number_of_decimals):
-        self.width = set_to_decimal(self.width, number_of_decimals)
-        self.height = set_to_decimal(self.height, number_of_decimals)
-        self.depth = set_to_decimal(self.depth, number_of_decimals)
-        self.max_weight = set_to_decimal(self.max_weight, number_of_decimals)
+    def formatNumbers(self, number_of_decimals):
+        self.width = set2Decimal(self.width, number_of_decimals)
+        self.height = set2Decimal(self.height, number_of_decimals)
+        self.depth = set2Decimal(self.depth, number_of_decimals)
+        self.max_weight = set2Decimal(self.max_weight, number_of_decimals)
         self.number_of_decimals = number_of_decimals
 
     def string(self):
         return "%s(%sx%sx%s, max_weight:%s) vol(%s)" % (
             self.name, self.width, self.height, self.depth, self.max_weight,
-            self.get_volume()
+            self.getVolume()
         )
 
-    def get_volume(self):
-        return set_to_decimal(
+    def getVolume(self):
+        return set2Decimal(
             self.width * self.height * self.depth, self.number_of_decimals
         )
 
-    def get_total_weight(self):
+    def getTotalWeight(self):
         total_weight = 0
 
         for item in self.items:
             total_weight += item.weight
 
-        return set_to_decimal(total_weight, self.number_of_decimals)
+        return set2Decimal(total_weight, self.number_of_decimals)
 
-    def put_item(self, item, pivot,axis=None):
+    def putItem(self, item, pivot,axis=None):
         
         fit = False
         valid_item_position = item.position
@@ -121,7 +121,7 @@ class Bin:
         rotate = RotationType.ALL if item.updown == True else RotationType.Notupdown
         for i in range(0, len(rotate)):
             item.rotation_type = i
-            dimension = item.get_dimension()
+            dimension = item.getDimension()
             # rotatate
             if (
                 self.width < pivot[0] + dimension[0] or
@@ -139,7 +139,7 @@ class Bin:
 
             if fit:
                 # cal total weight
-                if self.get_total_weight() + item.weight > self.max_weight:
+                if self.getTotalWeight() + item.weight > self.max_weight:
                     fit = False
                     return fit
 
@@ -154,14 +154,14 @@ class Bin:
 
                     for i in range(3):
                         # fix height
-                        y = self.checkheight([x,x+float(w),y,y+float(h),z,z+float(d)])
+                        y = self.checkHeight([x,x+float(w),y,y+float(h),z,z+float(d)])
                         # fix width
-                        x = self.checkwidth([x,x+float(w),y,y+float(h),z,z+float(d)])
+                        x = self.checkWidth([x,x+float(w),y,y+float(h),z,z+float(d)])
                         # fix depth
-                        z = self.checkdepth([x,x+float(w),y,y+float(h),z,z+float(d)])
+                        z = self.checkDepth([x,x+float(w),y,y+float(h),z,z+float(d)])
 
                     self.fit_items = np.append(self.fit_items,np.array([[x,x+float(w),y,y+float(h),z,z+float(d)]]),axis=0)
-                    item.position = [set_to_decimal(x),set_to_decimal(y),set_to_decimal(z)]
+                    item.position = [set2Decimal(x),set2Decimal(y),set2Decimal(z)]
                     
                 self.items.append(item)
 
@@ -175,7 +175,7 @@ class Bin:
 
         return fit
 
-    def checkdepth(self,unfix_point):
+    def checkDepth(self,unfix_point):
         z_ = [[0,0],[float(self.depth),float(self.depth)]]
         for j in self.fit_items:
             # creat x set
@@ -195,7 +195,7 @@ class Bin:
                 return z_[j][1]
         return unfix_point[4]
 
-    def checkwidth(self,unfix_point):
+    def checkWidth(self,unfix_point):
         x_ = [[0,0],[float(self.width),float(self.width)]]
         for j in self.fit_items:
             # creat z set
@@ -215,7 +215,7 @@ class Bin:
                 return x_[j][1]
         return unfix_point[0]
     
-    def checkheight(self,unfix_point):
+    def checkHeight(self,unfix_point):
         y_ = [[0,0],[float(self.height),float(self.height)]]
         for j in self.fit_items:
             # creat x set
@@ -236,9 +236,9 @@ class Bin:
 
         return unfix_point[2]
 
-    def add_corner(self):
+    def addCorner(self):
         if self.corner != 0 :
-            corner = set_to_decimal(self.corner)
+            corner = set2Decimal(self.corner)
             corner_list = []
             for i in range(8):
                 a = Item(
@@ -254,11 +254,11 @@ class Bin:
                 corner_list.append(a)
             return corner_list
 
-    def put_corner(self,info,item):
+    def putCorner(self,info,item):
         fit = False
-        x = set_to_decimal(self.width - self.corner)
-        y = set_to_decimal(self.height - self.corner)
-        z = set_to_decimal(self.depth - self.corner)
+        x = set2Decimal(self.width - self.corner)
+        y = set2Decimal(self.height - self.corner)
+        z = set2Decimal(self.depth - self.corner)
         pos = [[0,0,0],[0,0,z],[0,y,z],[0,y,0],[x,y,0],[x,0,0],[x,0,z],[x,y,z]]
         item.position = pos[info]
         self.items.append(item)
@@ -268,7 +268,7 @@ class Bin:
         self.fit_items = np.append(self.fit_items,np.array([corner]),axis=0)
         return
 
-    def clear_bin(self):
+    def clearBin(self):
         self.items = []
         self.fit_items = np.array([[0,self.width,0,self.height,0,0]])
         return
@@ -283,26 +283,26 @@ class Packer:
         self.binding = []
         # self.apex = []
 
-    def add_bin(self, bin):
+    def addBin(self, bin):
         return self.bins.append(bin)
 
-    def add_item(self, item):
+    def addItem(self, item):
         self.total_items = len(self.items) + 1
 
         return self.items.append(item)
 
-    def pack_to_bin(self, bin, item,fix_point):
+    def pack2Bin(self, bin, item,fix_point):
         fitted = False
         bin.fix_point = fix_point
 
         # first put item on (0,0,0) , if there are corner in box ,first add corner on box. 
         if bin.corner != 0 and not bin.items:
-            corner_lst = bin.add_corner()
+            corner_lst = bin.addCorner()
             for i in range(len(corner_lst)) :
-                bin.put_corner(i,corner_lst[i])
+                bin.putCorner(i,corner_lst[i])
 
         elif not bin.items:
-            response = bin.put_item(item, item.position)
+            response = bin.putItem(item, item.position)
 
             if not response:
                 bin.unfitted_items.append(item)
@@ -314,7 +314,7 @@ class Packer:
             # 遍歷所有已在box 的item
             for ib in items_in_bin:
                 pivot = [0, 0, 0]
-                w, h, d = ib.get_dimension()
+                w, h, d = ib.getDimension()
                 if axis == Axis.WIDTH:
                     # 加上長度避免超出box
                     pivot = [ib.position[0] + w,ib.position[1],ib.position[2]]
@@ -323,7 +323,7 @@ class Packer:
                 elif axis == Axis.DEPTH:
                     pivot = [ib.position[0],ib.position[1],ib.position[2] + d]
                     
-                if bin.put_item(item, pivot, axis):
+                if bin.putItem(item, pivot, axis):
                     fitted = True
                     break
             if fitted:
@@ -331,7 +331,7 @@ class Packer:
         if not fitted:
             bin.unfitted_items.append(item)
 
-    def sort_binding(self,bin):
+    def sortBinding(self,bin):
         ''' sorted by binding '''
         b,front,back = [],[],[]
         for i in range(len(self.binding)):
@@ -363,27 +363,27 @@ class Packer:
     def pack(self, bigger_first=False,distribute_items=False,fix_point=True,binding=[],number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS):
         # set decimals
         for bin in self.bins:
-            bin.format_numbers(number_of_decimals)
+            bin.formatNumbers(number_of_decimals)
 
         for item in self.items:
-            item.format_numbers(number_of_decimals)
+            item.formatNumbers(number_of_decimals)
         # add binding attribute
         self.binding = binding
         # Bin : sorted by volumn
-        self.bins.sort(key=lambda bin: bin.get_volume(), reverse=bigger_first)
+        self.bins.sort(key=lambda bin: bin.getVolume(), reverse=bigger_first)
         # Item : sorted by volumn -> sorted by loadbear -> sorted by level -> binding
-        self.items.sort(key=lambda item: item.get_volume(), reverse=bigger_first)
-        # self.items.sort(key=lambda item: item.get_max_area(), reverse=bigger_first)
+        self.items.sort(key=lambda item: item.getVolume(), reverse=bigger_first)
+        # self.items.sort(key=lambda item: item.getMaxArea(), reverse=bigger_first)
         self.items.sort(key=lambda item: item.loadbear, reverse=True)
         self.items.sort(key=lambda item: item.level, reverse=False)
         # sorted by binding
         if binding != []:
-            self.sort_binding(bin)
+            self.sortBinding(bin)
 
         for bin in self.bins:
             # pack item to bin
             for item in self.items:
-                self.pack_to_bin(bin, item,fix_point)
+                self.pack2Bin(bin, item,fix_point)
             # no used
             if distribute_items :
                 for item in bin.items:
@@ -395,7 +395,7 @@ class Packer:
 
             if binding != []:
                 # resorted
-                self.items.sort(key=lambda item: item.get_volume(), reverse=bigger_first)
+                self.items.sort(key=lambda item: item.getVolume(), reverse=bigger_first)
                 self.items.sort(key=lambda item: item.loadbear, reverse=True)
                 self.items.sort(key=lambda item: item.level, reverse=False)
                 self.items = self.items + bin.unfitted_items
@@ -405,8 +405,11 @@ class Packer:
                 bin.fit_items = np.array([[0,bin.width,0,bin.height,0,0]])
                 # repacking
                 for item in self.items:
-                    self.pack_to_bin(bin, item,fix_point)
+                    self.pack2Bin(bin, item,fix_point)
 
+    def putOrder(self):
+        return
+    
 
 class Painter:
     def __init__(self,bins):
@@ -460,7 +463,7 @@ class Painter:
         for item in self.items:
             rt = item.rotation_type  
             x,y,z = item.position
-            [w,h,d] = item.get_dimension()
+            [w,h,d] = item.getDimension()
             color = item.color
             self._plotCube(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
             counter = counter + 1  
@@ -468,10 +471,10 @@ class Painter:
         self._plotCube(axGlob,0, 0, 0, float(self.width), float(self.height), float(self.depth),color='black',mode=1)
 
         plt.title(title)
-        self.set_axes_equal(axGlob)
+        self.setAxesEqual(axGlob)
         plt.show()
 
-    def set_axes_equal(self,ax):
+    def setAxesEqual(self,ax):
     
         '''Make axes of 3D plot have equal scale so that spheres appear as spheres,
         cubes as cubes, etc..  This is one possible solution to Matplotlib's

@@ -6,28 +6,28 @@
 <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/3.jpeg" width="600"/>
 
 ## improvement
-1. fix item float on air :
-    - ```[fix_point = False/True]``` The original packaging method did not consider the gravity problem. After the packaging was completed, there were items floating in the air, which greatly reduced the space utilization of the box. I solved this problem and improved the boxing rate.
+1. fix item float :
+    - ```[fix_point = False/True] type bool``` The original packaging method did not consider the gravity problem. After the packaging was completed, there were items floating in the air, which greatly reduced the space utilization of the box. I solved this problem and improved the boxing rate.
 
 Original packaging  |  Used fix point
 :-------------------------:|:-------------------------:
 <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/1.jpg" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/2.jpg" width="400"/>
 
 2. Item bearing problem :
-    - ```[loadbear = X]``` 
+    - ```[loadbear = X] type int``` 
 The original method did not consider the problem of project load-bearing, because load-bearing involves the structure, I used the priority to sort the projects with higher load-bearing capacity.The higher the number, the higher the priority.
 
 3. Item need to pack :
-    - ```[level = X]``` The priority can be set to sort which items should be packaged first, to ensure that these items will be packaged in bin.The lower the number, the higher the priority.
+    - ```[level = X] type int``` The priority can be set to sort which items should be packaged first, to ensure that these items will be packaged in bin.The lower the number, the higher the priority.
 
 4. Items can be placed upside down or not :
-    - ```[updown = False/True]``` True means the item can be placed upside down.
+    - ```[updown = False/True] type bool``` True means the item can be placed upside down.
 
 5. Complete set of items : 
-    - ```[binding = [(orange,apple),(computer,hat,watch)]]``` Set of items can be set (ex. binding = [(orange,apple),(computer,hat,watch)]).
+    - ```[binding = [(orange,apple),(computer,hat,watch)]] type tuple in list``` Set of items can be set (ex. binding = [(orange,apple),(computer,hat,watch)]).
 
 6. Container coner : 
-    - ```[corner = X]``` Set the size of container corner, the unit is cm.
+    - ```[corner = X] type int``` Set the size of container corner, the unit is cm.
 
 7. draw picture : 
     - ```[painter.plotBoxAndItems()]``` draw pictures.
