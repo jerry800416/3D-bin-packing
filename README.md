@@ -35,6 +35,10 @@ The original method did not consider the problem of project load-bearing, becaus
 8. Calculate gravity distribution :
     - ```print("gravity distribution : ",bin.gravity) ``` Divide the bin into four equal parts, and calculate the weight ratio of the equal parts. Ideally, the weight ratio of each equal part tends to be close.
 
+9. Add the order of placing items :
+    - ```put_type=0 or 1 (0 : general & 1 : open top)``` Added the order of placing items. There are two placement methods. Set the bin to open top or general, and the returned results are sorted according to this method.
+
+
 ## How to use
 
 Init bin : 
@@ -44,6 +48,7 @@ box1 = Bin(
     WHD=(589,243,259),    # (width , height , depth)
     max_weight=28080,     # box can bear the weight
     corner=15             # container coner
+    put_type= 1           # add the order of placing items
     )
 ```
 Init item : 
