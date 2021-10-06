@@ -62,7 +62,8 @@ def makeDictBox(box):
             "partNumber" : box.name,
             "position" : position,
             "WHD" : (int(box.width),int(box.height),int(box.depth)),
-            "weight" : int(box.max_weight)
+            "weight" : int(box.max_weight),
+            "gravity" : box.gravity
         }
     return [r]
 
@@ -108,12 +109,12 @@ def makeBoxAndItem():
     packer = Packer()
     # 長榮海運真實貨櫃(二十呎鋼製乾貨貨櫃) 單位 公分/公斤
     box = Bin(name='Bin',WHD=(590,244,260),max_weight=28080,corner=15)
-    packer.add_bin(box)
+    packer.addBin(box)
 
     # 一台 dyson DC34 為20.5 * 11.5 * 32.2 (1.33kg)
     # 一箱 假設為64個 , 為 82 * 46 * 170 (85.12)
     for i in range(7): 
-        packer.add_item(Item(
+        packer.addItem(Item(
             name='Dyson DC34 Animal{}'.format(str(i+1)),
             typeof='Dyson', 
             WHD=(170, 82, 46), 
@@ -126,7 +127,7 @@ def makeBoxAndItem():
     
     # 洗衣機 一箱一個 850 * 600 *600 (10 kG)
     for i in range(18):
-        packer.add_item(Item(
+        packer.addItem(Item(
             name='wash{}'.format(str(i+1)),
             typeof='wash',
             WHD=(85, 60, 60), 
@@ -139,7 +140,7 @@ def makeBoxAndItem():
 
     # 42U 標準機櫃 : 一箱一個
     for i in range(15):
-        packer.add_item(Item(
+        packer.addItem(Item(
             name='Cabinet{}'.format(str(i+1)),
             typeof='cabint',
             WHD=(60, 80, 200), 
@@ -152,7 +153,7 @@ def makeBoxAndItem():
 
     # 伺服器 : 一箱一個
     for i in range(42):
-        packer.add_item(Item(
+        packer.addItem(Item(
             name='Server{}'.format(str(i+1)),
             typeof='server', 
             WHD=(70, 100, 30), 
