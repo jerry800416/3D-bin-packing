@@ -23,14 +23,17 @@ The original method did not consider the problem of project load-bearing, becaus
 4. Items can be placed upside down or not :
     - ```[updown = False/True] type bool``` True means the item can be placed upside down.
 
-5. Complete set of items : 
-    - ```[binding = [(orange,apple),(computer,hat,watch)]] type tuple in list``` Set of items can be set (ex. binding = [(orange,apple),(computer,hat,watch)]).
+5. Make a set of items : 
+    - ```[binding = [(orange,apple),(computer,hat,watch)]] type tuple in list``` The number of items in the set must be the same in the bin(ex. binding = [(orange,apple),(computer,hat,watch)]).
 
 6. Container coner : 
     - ```[corner = X] type int``` Set the size of container corner, the unit is cm.
 
-7. draw picture : 
-    - ```[painter.plotBoxAndItems()]``` draw pictures.
+7. Draw picture : 
+    - ```[painter.plotBoxAndItems()]``` Draw pictures.
+
+8. Calculate gravity distribution :
+    - ```print("gravity distribution : ",bin.gravity) ``` Divide the bin into four equal parts, and calculate the weight ratio of the equal parts. Ideally, the weight ratio of each equal part tends to be close.
 
 ## How to use
 
@@ -51,8 +54,8 @@ item1 = Item(
         WHD=(85, 60, 60),  # (width , height , depth)
         weight=10,         # item weight
         level=1,           # priority (Item need to pack)
-        loadbear=100,      # Item bearing
-        updown=True,       # Item bearing
+        loadbear=100,      # item bearing
+        updown=True,       # item fall down or not
         color='#FFFF37'    # set item color , you also can use color='red' 
     )
 ```
@@ -60,7 +63,7 @@ Init packer :
 ```
 packer = Packer()          # packer init
 ```
-Add bin and items to packer : 
+Add bin and items to packer : (Warning : You can only add one bin,but you can add many items.)
 ```
 packer.addBin(box1)       # adding bins to packer
 packer.addItem(item1)     # adding items to packer
@@ -70,7 +73,7 @@ Start pack items :
 packer.pack(
     bigger_first=True,                 # bigger item first
     fix_point=True,                    # fix item float problem
-    binding=[('server','cabint')],     # Complete set of items
+    binding=[('server','cabint')],     # make a set of items
 )
 ```
 After packing:
@@ -164,6 +167,7 @@ print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2))
 print('residual volumn : ', float(volume) - volume_t )
 print('unpack item : ',unfitted_name)
 print('unpack item volumn : ',volume_f)
+print("gravity distribution : ",b.gravity)
 stop = time.time()
 print('used time : ',stop - start)
 

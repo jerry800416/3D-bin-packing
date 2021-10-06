@@ -12,7 +12,7 @@ start = time.time()
 packer = Packer()
 #  init bin 
 # try Bin('Bin', (5, 1, 6), 100,0), you can find different results.
-box = Bin('Bin', (6, 1, 5), 100,0)
+box = Bin('Bin', (6, 1, 5), 100,0,put_type=0)
 #  add item
 # Item('item name', (W,H,D), Weight, Packing Priority level, load bear, Upside down or not , 'item color')
 packer.addBin(box)
@@ -60,6 +60,7 @@ print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2))
 print('residual volumn : ', float(volume) - volume_t )
 print('unpack item : ',unfitted_name)
 print('unpack item volumn : ',volume_f)
+print("gravity distribution : ",b.gravity)
 stop = time.time()
 print('used time : ',stop - start)
 

@@ -11,7 +11,8 @@ box = Bin(
     name='Bin',
     WHD=(589.8,243.8,259.1),
     max_weight=28080,
-    corner=15
+    corner=15,
+    put_type=0
 )
 packer.addBin(box)
 
@@ -119,6 +120,7 @@ print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2))
 print('residual volumn : ', float(volume) - volume_t )
 print('unpack item : ',unfitted_name)
 print('unpack item volumn : ',volume_f)
+print("gravity distribution : ",b.gravity)
 # '''
 stop = time.time()
 print('used time : ',stop - start)

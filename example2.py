@@ -5,7 +5,7 @@ start = time.time()
 # init packing function
 packer = Packer()
 #  init bin
-box = Bin('example2',(30, 10, 15), 99,0)
+box = Bin('example2',(30, 10, 15), 99,0,1)
 packer.addBin(box)
 #  add item
 packer.addItem(Item('test1', 'test',(9, 8, 7), 1, 1, 100, True,'red'))
@@ -77,6 +77,7 @@ print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2))
 print('residual volumn : ', float(volume) - volume_t )
 print('unpack item : ',unfitted_name)
 print('unpack item volumn : ',volume_f)
+print("gravity distribution : ",b.gravity)
 stop = time.time()
 print('used time : ',stop - start)
 

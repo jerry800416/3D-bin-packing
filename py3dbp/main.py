@@ -13,6 +13,7 @@ START_POSITION = [0, 0, 0]
 
 class Item:
     def __init__(self, name,typeof, WHD, weight, level, loadbear, updown, color):
+        ''' '''
         self.name = name
         self.typeof = typeof
         self.width = WHD[0]
@@ -32,6 +33,7 @@ class Item:
         self.number_of_decimals = DEFAULT_NUMBER_OF_DECIMALS
 
     def formatNumbers(self, number_of_decimals):
+        ''' '''
         self.width = set2Decimal(self.width, number_of_decimals)
         self.height = set2Decimal(self.height, number_of_decimals)
         self.depth = set2Decimal(self.depth, number_of_decimals)
@@ -39,22 +41,24 @@ class Item:
         self.number_of_decimals = number_of_decimals
 
     def string(self):
+        ''' '''
         return "%s(%sx%sx%s, weight: %s) pos(%s) rt(%s) vol(%s)" % (
             self.name, self.width, self.height, self.depth, self.weight,
             self.position, self.rotation_type, self.getVolume()
         )
 
     def getVolume(self):
+        ''' '''
         return set2Decimal(self.width * self.height * self.depth, self.number_of_decimals)
 
     def getMaxArea(self):
-        '''
-        '''
+        ''' '''
         a = sorted([self.width,self.height,self.depth],reverse=True) if self.updown == True else [self.width,self.height,self.depth]
     
         return set2Decimal(a[0] * a[1] , self.number_of_decimals)
 
     def getDimension(self):
+        ''' rotation type '''
         if self.rotation_type == RotationType.RT_WHD:
             dimension = [self.width, self.height, self.depth]
         elif self.rotation_type == RotationType.RT_HWD:
@@ -74,7 +78,8 @@ class Item:
 
 
 class Bin:
-    def __init__(self, name, WHD, max_weight,corner):
+    def __init__(self, name, WHD, max_weight,corner=0,put_type=0):
+        ''' '''
         self.name = name
         self.width = WHD[0]
         self.height = WHD[1]
@@ -86,8 +91,12 @@ class Bin:
         self.unfitted_items = []
         self.number_of_decimals = DEFAULT_NUMBER_OF_DECIMALS
         self.fix_point = False
+        self.put_type = put_type
+        # used to put gravity distribution
+        self.gravity = []
 
     def formatNumbers(self, number_of_decimals):
+        ''' '''
         self.width = set2Decimal(self.width, number_of_decimals)
         self.height = set2Decimal(self.height, number_of_decimals)
         self.depth = set2Decimal(self.depth, number_of_decimals)
@@ -95,17 +104,20 @@ class Bin:
         self.number_of_decimals = number_of_decimals
 
     def string(self):
+        ''' '''
         return "%s(%sx%sx%s, max_weight:%s) vol(%s)" % (
             self.name, self.width, self.height, self.depth, self.max_weight,
             self.getVolume()
         )
 
     def getVolume(self):
+        ''' '''
         return set2Decimal(
             self.width * self.height * self.depth, self.number_of_decimals
         )
 
     def getTotalWeight(self):
+        ''' '''
         total_weight = 0
 
         for item in self.items:
@@ -114,7 +126,7 @@ class Bin:
         return set2Decimal(total_weight, self.number_of_decimals)
 
     def putItem(self, item, pivot,axis=None):
-        
+        ''' put item in bin '''
         fit = False
         valid_item_position = item.position
         item.position = pivot
@@ -176,6 +188,7 @@ class Bin:
         return fit
 
     def checkDepth(self,unfix_point):
+        ''' fix item position z '''
         z_ = [[0,0],[float(self.depth),float(self.depth)]]
         for j in self.fit_items:
             # creat x set
@@ -196,6 +209,7 @@ class Bin:
         return unfix_point[4]
 
     def checkWidth(self,unfix_point):
+        ''' fix item position x ''' 
         x_ = [[0,0],[float(self.width),float(self.width)]]
         for j in self.fit_items:
             # creat z set
@@ -216,6 +230,7 @@ class Bin:
         return unfix_point[0]
     
     def checkHeight(self,unfix_point):
+        '''fix item position y '''
         y_ = [[0,0],[float(self.height),float(self.height)]]
         for j in self.fit_items:
             # creat x set
@@ -237,6 +252,7 @@ class Bin:
         return unfix_point[2]
 
     def addCorner(self):
+        '''add container coner '''
         if self.corner != 0 :
             corner = set2Decimal(self.corner)
             corner_list = []
@@ -255,6 +271,7 @@ class Bin:
             return corner_list
 
     def putCorner(self,info,item):
+        '''put coner in bin '''
         fit = False
         x = set2Decimal(self.width - self.corner)
         y = set2Decimal(self.height - self.corner)
@@ -269,6 +286,7 @@ class Bin:
         return
 
     def clearBin(self):
+        ''' clear item which in bin '''
         self.items = []
         self.fit_items = np.array([[0,self.width,0,self.height,0,0]])
         return
@@ -276,6 +294,7 @@ class Bin:
 
 class Packer:
     def __init__(self):
+        ''' '''
         self.bins = []
         self.items = []
         self.unfit_items = []
@@ -284,18 +303,21 @@ class Packer:
         # self.apex = []
 
     def addBin(self, bin):
+        ''' '''
         return self.bins.append(bin)
 
     def addItem(self, item):
+        ''' '''
         self.total_items = len(self.items) + 1
 
         return self.items.append(item)
 
     def pack2Bin(self, bin, item,fix_point):
+        ''' pack item to bin '''
         fitted = False
         bin.fix_point = fix_point
 
-        # first put item on (0,0,0) , if there are corner in box ,first add corner on box. 
+        # first put item on (0,0,0) , if corner exist ,first add corner in box. 
         if bin.corner != 0 and not bin.items:
             corner_lst = bin.addCorner()
             for i in range(len(corner_lst)) :
@@ -308,15 +330,12 @@ class Packer:
                 bin.unfitted_items.append(item)
             return
 
-        # 延x軸,y軸,z軸
         for axis in range(0, 3):
             items_in_bin = bin.items
-            # 遍歷所有已在box 的item
             for ib in items_in_bin:
                 pivot = [0, 0, 0]
                 w, h, d = ib.getDimension()
                 if axis == Axis.WIDTH:
-                    # 加上長度避免超出box
                     pivot = [ib.position[0] + w,ib.position[1],ib.position[2]]
                 elif axis == Axis.HEIGHT:
                     pivot = [ib.position[0],ib.position[1] + h,ib.position[2]]
@@ -360,7 +379,109 @@ class Packer:
         self.items = front + sort_bind + back
         return
 
+    def putOrder(self):
+        '''Arrange the order of items '''
+        r = []
+        for i in self.bins:
+            # open top container
+            if i.put_type == 1:
+                i.items.sort(key=lambda item: item.position[0], reverse=False)
+                i.items.sort(key=lambda item: item.position[1], reverse=False)
+                i.items.sort(key=lambda item: item.position[2], reverse=False)
+            # general container
+            elif i.put_type == 0:
+                i.items.sort(key=lambda item: item.position[1], reverse=False)
+                i.items.sort(key=lambda item: item.position[2], reverse=False)
+                i.items.sort(key=lambda item: item.position[0], reverse=False)
+            else :
+                pass
+        return
+
+    # Deviation Of Cargo gravity distribution
+    def gravityCenter(self):
+        ''' 
+        Deviation Of Cargo gravity distribution
+        ''' 
+        w = int(self.bins[0].width)
+        h = int(self.bins[0].height)
+        d = int(self.bins[0].depth)
+
+        area1 = [set(range(0,w//2+1)),set(range(0,h//2+1)),0]
+        area2 = [set(range(w//2+1,w+1)),set(range(0,h//2+1)),0]
+        area3 = [set(range(0,w//2+1)),set(range(h//2+1,h+1)),0]
+        area4 = [set(range(w//2+1,w+1)),set(range(h//2+1,h+1)),0]
+        area = [area1,area2,area3,area4]
+
+        for i in self.bins[0].items:
+
+            x_st = int(i.position[0])
+            y_st = int(i.position[1])
+            if i.rotation_type == 0:
+                x_ed = int(i.position[0] + i.width)
+                y_ed = int(i.position[1] + i.height)
+            elif i.rotation_type == 1:
+                x_ed = int(i.position[0] + i.height)
+                y_ed = int(i.position[1] + i.width)
+            elif i.rotation_type == 2:
+                x_ed = int(i.position[0] + i.height)
+                y_ed = int(i.position[1] + i.depth)
+            elif i.rotation_type == 3:
+                x_ed = int(i.position[0] + i.depth)
+                y_ed = int(i.position[1] + i.height)
+            elif i.rotation_type == 4:
+                x_ed = int(i.position[0] + i.depth)
+                y_ed = int(i.position[1] + i.width)
+            elif i.rotation_type == 5:
+                x_ed = int(i.position[0] + i.width)
+                y_ed = int(i.position[1] + i.depth)
+
+            x_set = set(range(x_st,int(x_ed)+1))
+            y_set = set(range(y_st,y_ed+1))
+
+            # cal gravity distribution
+            for j in range(len(area)):
+                if x_set.issubset(area[j][0]) and y_set.issubset(area[j][1]) : 
+                    area[j][2] += int(i.weight)
+                    break
+                # include x and !include y
+                elif x_set.issubset(area[j][0]) == True and y_set.issubset(area[j][1]) == False and len(y_set & area[j][1]) != 0 : 
+                    y = len(y_set & area[j][1]) / (y_ed - y_st) * int(i.weight)
+                    area[j][2] += y
+                    if j >= 2 :
+                        area[j-2][2] += (int(i.weight) - x)
+                    else :
+                        area[j+2][2] += (int(i.weight) - y)
+                    break
+                # include y and !include x
+                elif x_set.issubset(area[j][0]) == False and y_set.issubset(area[j][1]) == True and len(x_set & area[j][0]) != 0 : 
+                    x = len(x_set & area[j][0]) / (x_ed - x_st) * int(i.weight)
+                    area[j][2] += x
+                    if j >= 2 :
+                        area[j-2][2] += (int(i.weight) - x)
+                    else :
+                        area[j+2][2] += (int(i.weight) - x)
+                    break
+                # !include x and !include y
+                elif x_set.issubset(area[j][0])== False and y_set.issubset(area[j][1]) == False and len(y_set & area[j][1]) != 0  and len(x_set & area[j][0]) != 0 :
+                    all = (y_ed - y_st) * (x_ed - x_st)
+                    y = len(y_set & area[0][1])
+                    y_2 = y_ed - y_st - y
+                    x = len(x_set & area[0][0])
+                    x_2 = x_ed - x_st - x
+                    area[0][2] += x * y / all * int(i.weight)
+                    area[1][2] += x_2 * y / all * int(i.weight)
+                    area[2][2] += x * y_2 / all * int(i.weight)
+                    area[3][2] += x_2 * y_2 / all * int(i.weight)
+                    break
+            
+        r = [area[0][2],area[1][2],area[2][2],area[3][2]]
+        result = []
+        for i in r :
+            result.append(round(i / sum(r) * 100,2))
+        return result
+
     def pack(self, bigger_first=False,distribute_items=False,fix_point=True,binding=[],number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS):
+        '''pack master func '''
         # set decimals
         for bin in self.bins:
             bin.formatNumbers(number_of_decimals)
@@ -406,13 +527,16 @@ class Packer:
                 # repacking
                 for item in self.items:
                     self.pack2Bin(bin, item,fix_point)
+        # put order of items
+        self.putOrder()
+        # Deviation Of Cargo Gravity Center 
+        self.bins[0].gravity = self.gravityCenter()
 
-    def putOrder(self):
-        return
-    
+
 
 class Painter:
     def __init__(self,bins):
+        ''' '''
         self.items = bins.items
         self.width = bins.width
         self.height = bins.height
@@ -420,7 +544,6 @@ class Painter:
 
     def _plotCube(self, ax, x, y, z, dx, dy, dz, color='red',mode=2):
         """ Auxiliary function to plot a cube. code taken somewhere from the web.  """
-
         xx = [x, x, x+dx, x+dx, x]
         yy = [y, y+dy, y+dy, y, y]
         
@@ -475,15 +598,12 @@ class Painter:
         plt.show()
 
     def setAxesEqual(self,ax):
-    
         '''Make axes of 3D plot have equal scale so that spheres appear as spheres,
         cubes as cubes, etc..  This is one possible solution to Matplotlib's
         ax.set_aspect('equal') and ax.axis('equal') not working for 3D.
 
         Input
-        ax: a matplotlib axis, e.g., as output from plt.gca().
-        '''
-
+        ax: a matplotlib axis, e.g., as output from plt.gca().'''
         x_limits = ax.get_xlim3d()
         y_limits = ax.get_ylim3d()
         z_limits = ax.get_zlim3d()
