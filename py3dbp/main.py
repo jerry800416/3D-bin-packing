@@ -2,7 +2,7 @@ from .constants import RotationType, Axis
 from .auxiliary_methods import intersect, set2Decimal
 import numpy as np
 # required to plot a representation of Bin and contained items 
-from matplotlib.patches import Rectangle
+from matplotlib.patches import Rectangle,Circle
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.art3d as art3d
 from collections import Counter
@@ -12,8 +12,9 @@ START_POSITION = [0, 0, 0]
 
 
 class Item:
-    def __init__(self, name,typeof, WHD, weight, level, loadbear, updown, color):
+    def __init__(self, partno,name,typeof, WHD, weight, level, loadbear, updown, color):
         ''' '''
+        self.partno = partno
         self.name = name
         self.typeof = typeof
         self.width = WHD[0]
@@ -25,7 +26,7 @@ class Item:
         # loadbear
         self.loadbear = loadbear
         # Upside down? True or False
-        self.updown = updown
+        self.updown = updown if typeof == 'cube' else False
         # Draw item color
         self.color = color
         self.rotation_type = 0
@@ -43,7 +44,7 @@ class Item:
     def string(self):
         ''' '''
         return "%s(%sx%sx%s, weight: %s) pos(%s) rt(%s) vol(%s)" % (
-            self.name, self.width, self.height, self.depth, self.weight,
+            self.partno, self.width, self.height, self.depth, self.weight,
             self.position, self.rotation_type, self.getVolume()
         )
 
@@ -78,9 +79,9 @@ class Item:
 
 
 class Bin:
-    def __init__(self, name, WHD, max_weight,corner=0,put_type=0):
+    def __init__(self, partno, WHD, max_weight,corner=0,put_type=0):
         ''' '''
-        self.name = name
+        self.partno = partno
         self.width = WHD[0]
         self.height = WHD[1]
         self.depth = WHD[2]
@@ -106,7 +107,7 @@ class Bin:
     def string(self):
         ''' '''
         return "%s(%sx%sx%s, max_weight:%s) vol(%s)" % (
-            self.name, self.width, self.height, self.depth, self.max_weight,
+            self.partno, self.width, self.height, self.depth, self.max_weight,
             self.getVolume()
         )
 
@@ -155,7 +156,7 @@ class Bin:
                     fit = False
                     return fit
 
-                if item.name == 'Dyson DC34 Animal8':
+                if item.partno == 'Dyson DC34 Animal8':
                     print(123)
                     # self.fix_point = False
 
@@ -258,8 +259,9 @@ class Bin:
             corner_list = []
             for i in range(8):
                 a = Item(
-                    name='corner{}'.format(i),
-                    typeof='corner',  
+                    partno='corner{}'.format(i),
+                    name='corner', 
+                    typeof='cube',
                     WHD=(corner,corner,corner), 
                     weight=0, 
                     level=0, 
@@ -356,9 +358,9 @@ class Packer:
         for i in range(len(self.binding)):
             b.append([]) 
             for item in self.items:
-                if item.typeof in self.binding[i]:
+                if item.name in self.binding[i]:
                     b[i].append(item)
-                elif item.typeof not in self.binding:
+                elif item.name not in self.binding:
                     if len(b[0]) == 0 and item not in front:
                         front.append(item)
                     elif item not in back and item not in front:
@@ -555,7 +557,6 @@ class Painter:
             ax.plot3D([x, x], [y+dy, y+dy], [z, z+dz], **kwargs)
             ax.plot3D([x+dx, x+dx], [y+dy, y+dy], [z, z+dz], **kwargs)
             ax.plot3D([x+dx, x+dx], [y, y], [z, z+dz], **kwargs)
-
         else :
             p = Rectangle((x,y),dx,dy,fc=color,ec='black')
             p2 = Rectangle((x,y),dx,dy,fc=color,ec='black')
@@ -575,7 +576,25 @@ class Painter:
             art3d.pathpatch_2d_to_3d(p4, z=x + dx, zdir="x")
             art3d.pathpatch_2d_to_3d(p5, z=y, zdir="y")
             art3d.pathpatch_2d_to_3d(p6, z=y + dy, zdir="y")
-    
+
+    def _plotCylinder(self, ax, x, y, z, dx, dy, dz, color='red',mode=2):
+        """ Auxiliary function to plot a Cylinder  """
+        # plot the two circles above and below the cylinder
+        p = Circle((x+dx/2,y+dy/2),radius=dx/2,color=color,ec='black')
+        p2 = Circle((x+dx/2,y+dy/2),radius=dx/2,color=color,ec='black')
+        ax.add_patch(p)
+        ax.add_patch(p2)
+        art3d.pathpatch_2d_to_3d(p, z=z, zdir="z")
+        art3d.pathpatch_2d_to_3d(p2, z=z+dz, zdir="z")
+        # plot a circle in the middle of the cylinder
+        center_z = np.linspace(0, dz, 15)
+        theta = np.linspace(0, 2*np.pi, 15)
+        theta_grid, z_grid=np.meshgrid(theta, center_z)
+        x_grid = dx / 2 * np.cos(theta_grid) + x + dx / 2
+        y_grid = dy / 2 * np.sin(theta_grid) + y + dy / 2
+        z_grid = z_grid + z
+        ax.plot_surface(x_grid, y_grid, z_grid,shade=False,fc=color,ec='black',alpha=1,color=color)
+        
     def plotBoxAndItems(self,title=""):
         """ side effective. Plot the Bin and the items it contains. """
         fig = plt.figure()
@@ -588,12 +607,18 @@ class Painter:
             x,y,z = item.position
             [w,h,d] = item.getDimension()
             color = item.color
-            self._plotCube(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
+            if item.typeof == 'cube':
+                 # plot item of cube
+                self._plotCube(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
+            elif item.typeof == 'cylinder':
+                # plot item of cylinder
+                self._plotCylinder(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
+            
             counter = counter + 1  
-        # . plot scatola 
+        # plot bin 
         self._plotCube(axGlob,0, 0, 0, float(self.width), float(self.height), float(self.depth),color='black',mode=1)
 
-        plt.title(title)
+        plt.title('result')
         self.setAxesEqual(axGlob)
         plt.show()
 

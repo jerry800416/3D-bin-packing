@@ -38,13 +38,15 @@ The original method did not consider the problem of project load-bearing, becaus
 9. Add the order of placing items :
     - ```put_type=0 or 1 (0 : general & 1 : open top)``` Added the order of placing items. There are two placement methods. Set the bin to open top or general, and the returned results are sorted according to this method.
 
+10. Mixed cube and cylinder : 
+    - ```typeof=cube or cylinder ``` mixed with cube and cylinder .
 
 ## How to use
 
 Init bin : 
 ```
 box1 = Bin(
-    name='Bin',           # name / PN of item (unique value)
+    partno='Bin',         # partno / PN of item (unique value)
     WHD=(589,243,259),    # (width , height , depth)
     max_weight=28080,     # box can bear the weight
     corner=15             # container coner
@@ -54,14 +56,15 @@ box1 = Bin(
 Init item : 
 ```
 item1 = Item(
-        name='testItem',   # name / PN of item (unique value)
-        typeof='wash',     # type of item
+        partno='testItem', # partno / PN of item (unique value)
+        name='wash',       # type of item
+        typeof='cube',     # cube or cylinder
         WHD=(85, 60, 60),  # (width , height , depth)
         weight=10,         # item weight
         level=1,           # priority (Item need to pack)
         loadbear=100,      # item bearing
         updown=True,       # item fall down or not
-        color='#FFFF37'    # set item color , you also can use color='red' 
+        color='#FFFF37'    # set item color , you also can use color='red' or color='r'
     )
 ```
 Init packer : 
@@ -103,36 +106,36 @@ box = Bin('example2',(30, 10, 15), 99,0)
 packer.addBin(box)
 
 #  add item
-packer.addItem(Item('test1', 'test',(9, 8, 7), 1, 1, 100, True,'red'))
-packer.addItem(Item('test2', 'test',(4, 25, 1), 1, 1, 100, True,'blue'))
-packer.addItem(Item('test3', 'test',(2, 13, 5), 1, 1, 100, True,'gray'))
-packer.addItem(Item('test4', 'test',(7, 5, 4), 1, 1, 100, True,'orange'))
-packer.addItem(Item('test5', 'test',(10, 5, 2), 1, 1, 100, True,'lawngreen'))
-packer.addItem(Item('test6', 'test',(6, 5, 2), 1, 1, 100, True,'purple'))
-packer.addItem(Item('test7', 'test',(5, 2, 9), 1, 1, 100, True,'yellow'))
-packer.addItem(Item('test8', 'test',(10, 8, 5), 1, 1, 100, True,'pink'))
-packer.addItem(Item('test9', 'test',(1, 3, 5), 1, 1, 100, True,'brown'))
-packer.addItem(Item('test10', 'test',(8, 4, 7), 1, 1, 100, True,'cyan'))
-packer.addItem(Item('test11', 'test',(2, 5, 3), 1, 1, 100, True,'olive'))
-packer.addItem(Item('test12', 'test',(1, 9, 2), 1, 1, 100, True,'darkgreen'))
-packer.addItem(Item('test13', 'test',(7, 5, 4), 1, 1, 100, True,'orange'))
-packer.addItem(Item('test14', 'test',(10, 2, 1), 1, 1, 100, True,'lawngreen'))
-packer.addItem(Item('test15', 'test',(3, 2, 4), 1, 1, 100, True,'purple'))
-packer.addItem(Item('test16', 'test',(5, 7, 8), 1, 1, 100, True,'yellow'))
-packer.addItem(Item('test17', 'test',(4, 8, 3), 1, 1, 100, True,'white'))
-packer.addItem(Item('test18', 'test',(2, 11, 5), 1, 1, 100, True,'brown'))
-packer.addItem(Item('test19', 'test',(8, 3, 5), 1, 1, 100, True,'cyan'))
-packer.addItem(Item('test20', 'test',(7, 4, 5), 1, 1, 100, True,'olive'))
-packer.addItem(Item('test21', 'test',(2, 4, 11), 1, 1, 100, True,'darkgreen'))
-packer.addItem(Item('test22', 'test',(1, 3, 4), 1, 1, 100, True,'orange'))
-packer.addItem(Item('test23', 'test',(10, 5, 2), 1, 1, 100, True,'lawngreen'))
-packer.addItem(Item('test24', 'test',(7, 4, 5), 1, 1, 100, True,'purple'))
-packer.addItem(Item('test25', 'test',(2, 10, 3), 1, 1, 100, True,'yellow'))
-packer.addItem(Item('test26', 'test',(3, 8, 1), 1, 1, 100, True,'pink'))
-packer.addItem(Item('test27', 'test',(7, 2, 5), 1, 1, 100, True,'brown'))
-packer.addItem(Item('test28', 'test',(8, 9, 5), 1, 1, 100, True,'cyan'))
-packer.addItem(Item('test29', 'test',(4, 5, 10), 1, 1, 100, True,'olive'))
-packer.addItem(Item('test30', 'test',(10, 10, 2), 1, 1, 100, True,'darkgreen'))
+packer.addItem(Item('test1', 'test','cube',(9, 8, 7), 1, 1, 100, True,'red'))
+packer.addItem(Item('test2', 'test','cube',(4, 25, 1), 1, 1, 100, True,'blue'))
+packer.addItem(Item('test3', 'test','cube',(2, 13, 5), 1, 1, 100, True,'gray'))
+packer.addItem(Item('test4', 'test','cube',(7, 5, 4), 1, 1, 100, True,'orange'))
+packer.addItem(Item('test5', 'test','cube',(10, 5, 2), 1, 1, 100, True,'lawngreen'))
+packer.addItem(Item('test6', 'test','cube',(6, 5, 2), 1, 1, 100, True,'purple'))
+packer.addItem(Item('test7', 'test','cube',(5, 2, 9), 1, 1, 100, True,'yellow'))
+packer.addItem(Item('test8', 'test','cube',(10, 8, 5), 1, 1, 100, True,'pink'))
+packer.addItem(Item('test9', 'test','cube',(1, 3, 5), 1, 1, 100, True,'brown'))
+packer.addItem(Item('test10', 'test','cube',(8, 4, 7), 1, 1, 100, True,'cyan'))
+packer.addItem(Item('test11', 'test','cube',(2, 5, 3), 1, 1, 100, True,'olive'))
+packer.addItem(Item('test12', 'test','cube',(1, 9, 2), 1, 1, 100, True,'darkgreen'))
+packer.addItem(Item('test13', 'test','cube',(7, 5, 4), 1, 1, 100, True,'orange'))
+packer.addItem(Item('test14', 'test','cube',(10, 2, 1), 1, 1, 100, True,'lawngreen'))
+packer.addItem(Item('test15', 'test','cube',(3, 2, 4), 1, 1, 100, True,'purple'))
+packer.addItem(Item('test16', 'test','cube',(5, 7, 8), 1, 1, 100, True,'yellow'))
+packer.addItem(Item('test17', 'test','cube',(4, 8, 3), 1, 1, 100, True,'white'))
+packer.addItem(Item('test18', 'test','cube',(2, 11, 5), 1, 1, 100, True,'brown'))
+packer.addItem(Item('test19', 'test','cube',(8, 3, 5), 1, 1, 100, True,'cyan'))
+packer.addItem(Item('test20', 'test','cube',(7, 4, 5), 1, 1, 100, True,'olive'))
+packer.addItem(Item('test21', 'test','cube',(2, 4, 11), 1, 1, 100, True,'darkgreen'))
+packer.addItem(Item('test22', 'test','cube',(1, 3, 4), 1, 1, 100, True,'orange'))
+packer.addItem(Item('test23', 'test','cube',(10, 5, 2), 1, 1, 100, True,'lawngreen'))
+packer.addItem(Item('test24', 'test','cube',(7, 4, 5), 1, 1, 100, True,'purple'))
+packer.addItem(Item('test25', 'test','cube',(2, 10, 3), 1, 1, 100, True,'yellow'))
+packer.addItem(Item('test26', 'test','cube',(3, 8, 1), 1, 1, 100, True,'pink'))
+packer.addItem(Item('test27', 'test','cube',(7, 2, 5), 1, 1, 100, True,'brown'))
+packer.addItem(Item('test28', 'test','cube',(8, 9, 5), 1, 1, 100, True,'cyan'))
+packer.addItem(Item('test29', 'test','cube',(4, 5, 10), 1, 1, 100, True,'olive'))
+packer.addItem(Item('test30', 'test','cube',(10, 10, 2), 1, 1, 100, True,'darkgreen'))
 
 # calculate packing 
 packer.pack(bigger_first=True,distribute_items=100,fix_point=True,number_of_decimals=0)
@@ -147,7 +150,7 @@ volume_t = 0
 volume_f = 0
 unfitted_name = ''
 for item in b.items:
-    print("name : ",item.name)
+    print("partno : ",item.partno)
     print("color : ",item.color)
     print("position : ",item.position)
     print("rotation type : ",item.rotation_type)
@@ -159,13 +162,13 @@ for item in b.items:
 print("***************************************************")
 print("UNFITTED ITEMS:")
 for item in b.unfitted_items:
-    print("name : ",item.name)
+    print("partno : ",item.partno)
     print("color : ",item.color)
     print("W*H*D : ",str(item.width) +'*'+ str(item.height) +'*'+ str(item.depth))
     print("volume : ",float(item.width) * float(item.height) * float(item.depth))
     print("weight : ",float(item.weight))
     volume_f += float(item.width) * float(item.height) * float(item.depth)
-    unfitted_name += '{},'.format(item.name)
+    unfitted_name += '{},'.format(item.partno)
     print("***************************************************")
 print("***************************************************")
 print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2)))

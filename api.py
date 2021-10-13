@@ -59,7 +59,7 @@ def mkResultAPI():
 def makeDictBox(box):
     position = (int(box.width)/2,int(box.height)/2,int(box.depth)/2)
     r = {
-            "partNumber" : box.name,
+            "partNumber" : box.partno,
             "position" : position,
             "WHD" : (int(box.width),int(box.height),int(box.depth)),
             "weight" : int(box.max_weight),
@@ -91,7 +91,8 @@ def makeDictItem(item):
         whd = (int(item.width),int(item.depth),int(item.height))
     
     r = {
-        "partNumber" : item.name,
+        "partNumber" : item.partno,
+        "name" : item.name,
         "type" : item.typeof,
         "color" : item.color,
         "position" : pos,
@@ -108,15 +109,16 @@ def makeBoxAndItem():
     # init packer , bin
     packer = Packer()
     # 長榮海運真實貨櫃(二十呎鋼製乾貨貨櫃) 單位 公分/公斤
-    box = Bin(name='Bin',WHD=(590,244,260),max_weight=28080,corner=15)
+    box = Bin(partno='Bin',WHD=(590,244,260),max_weight=28080,corner=15)
     packer.addBin(box)
 
     # 一台 dyson DC34 為20.5 * 11.5 * 32.2 (1.33kg)
     # 一箱 假設為64個 , 為 82 * 46 * 170 (85.12)
     for i in range(7): 
         packer.addItem(Item(
-            name='Dyson DC34 Animal{}'.format(str(i+1)),
-            typeof='Dyson', 
+            partno='Dyson DC34 Animal{}'.format(str(i+1)),
+            name='Dyson', 
+            typeof='cylinder',
             WHD=(170, 82, 46), 
             weight=85.12,
             level=1,
@@ -128,8 +130,9 @@ def makeBoxAndItem():
     # 洗衣機 一箱一個 850 * 600 *600 (10 kG)
     for i in range(18):
         packer.addItem(Item(
-            name='wash{}'.format(str(i+1)),
-            typeof='wash',
+            partno='wash{}'.format(str(i+1)),
+            name='wash',
+            typeof='cube',
             WHD=(85, 60, 60), 
             weight=10,
             level=1,
@@ -141,8 +144,9 @@ def makeBoxAndItem():
     # 42U 標準機櫃 : 一箱一個
     for i in range(15):
         packer.addItem(Item(
-            name='Cabinet{}'.format(str(i+1)),
-            typeof='cabint',
+            partno='Cabinet{}'.format(str(i+1)),
+            name='cabint',
+            typeof='cube',
             WHD=(60, 80, 200), 
             weight=80,
             level=1,
@@ -154,8 +158,9 @@ def makeBoxAndItem():
     # 伺服器 : 一箱一個
     for i in range(42):
         packer.addItem(Item(
-            name='Server{}'.format(str(i+1)),
-            typeof='server', 
+            partno='Server{}'.format(str(i+1)),
+            name='server', 
+            typeof='cube',
             WHD=(70, 100, 30), 
             weight=20,
             level=1,

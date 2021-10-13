@@ -8,7 +8,7 @@ packer = Packer()
 # 長榮海運真實貨櫃(二十呎鋼製乾貨貨櫃)
 # 單位 公分/公斤
 box = Bin(
-    name='Bin',
+    partno='Bin',
     WHD=(589.8,243.8,259.1),
     max_weight=28080,
     corner=15,
@@ -20,8 +20,9 @@ packer.addBin(box)
 # 一箱 假設為64個 , 為 82 * 46 * 170 (85.12)
 for i in range(15): 
     packer.addItem(Item(
-        name='Dyson DC34 Animal{}'.format(str(i+1)),
-        typeof='Dyson', 
+        partno='Dyson DC34 Animal{}'.format(str(i+1)),
+        name='Dyson', 
+        typeof='cube',
         WHD=(170, 82, 46), 
         weight=85.12,
         level=1,
@@ -33,8 +34,9 @@ for i in range(15):
 # 洗衣機 一箱一個 850 * 600 *600 (10 kG)
 for i in range(18):
     packer.addItem(Item(
-        name='wash{}'.format(str(i+1)),
-        typeof='wash',
+        partno='wash{}'.format(str(i+1)),
+        name='wash',
+        typeof='cube',
         WHD=(85, 60, 60), 
         weight=10,
         level=1,
@@ -46,8 +48,9 @@ for i in range(18):
 # 42U 標準機櫃 : 一箱一個
 for i in range(15):
     packer.addItem(Item(
-        name='Cabinet{}'.format(str(i+1)),
-        typeof='cabint',
+        partno='Cabinet{}'.format(str(i+1)),
+        name='cabint',
+        typeof='cube',
         WHD=(60, 80, 200), 
         weight=80,
         level=1,
@@ -59,8 +62,9 @@ for i in range(15):
 # 伺服器 : 一箱一個
 for i in range(42):
     packer.addItem(Item(
-        name='Server{}'.format(str(i+1)),
-        typeof='server', 
+        partno='Server{}'.format(str(i+1)),
+        name='server',
+        typeof='cube',
         WHD=(70, 100, 30), 
         weight=20,
         level=1,
@@ -92,8 +96,8 @@ unfitted_name = ''
 
 # '''
 for item in box.items:
-    print("name : ",item.name)
-    print("type : ",item.typeof)
+    print("partno : ",item.partno)
+    print("type : ",item.name)
     print("color : ",item.color)
     print("position : ",item.position)
     print("rotation type : ",item.rotation_type)
@@ -106,21 +110,21 @@ print("***************************************************")
 # '''
 print("UNFITTED ITEMS:")
 for item in box.unfitted_items:
-    print("name : ",item.name)
-    print("type : ",item.typeof)
+    print("partno : ",item.partno)
+    print("type : ",item.name)
     print("color : ",item.color)
     print("W*H*D : ",str(item.width) +'*'+ str(item.height) +'*'+ str(item.depth))
     print("volume : ",float(item.width) * float(item.height) * float(item.depth))
     print("weight : ",float(item.weight))
     volume_f += float(item.width) * float(item.height) * float(item.depth)
-    unfitted_name += '{},'.format(item.name)
+    unfitted_name += '{},'.format(item.partno)
     print("***************************************************")
 print("***************************************************")
 print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2)))
 print('residual volumn : ', float(volume) - volume_t )
 print('unpack item : ',unfitted_name)
 print('unpack item volumn : ',volume_f)
-print("gravity distribution : ",b.gravity)
+print("gravity distribution : ",box.gravity)
 # '''
 stop = time.time()
 print('used time : ',stop - start)
