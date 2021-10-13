@@ -41,6 +41,8 @@ The original method did not consider the problem of project load-bearing, becaus
 10. Mixed cube and cylinder : 
     - ```typeof=cube or cylinder ``` mixed with cube and cylinder .
 
+<img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/4.jpeg" width="600"/>
+
 ## How to use
 
 Init bin : 
