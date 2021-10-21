@@ -79,8 +79,8 @@ packer.pack(
     bigger_first=True,
     distribute_items=False,
     fix_point=True,
-    # binding=[('server','cabint','wash')],
-    binding=['cabint','wash','server'],
+    binding=[('server','cabint','wash')],
+    # binding=['cabint','wash','server'],
     number_of_decimals=0
 )
 
