@@ -6,6 +6,9 @@ from flask_cors import cross_origin
 # init flask
 app = flask.Flask(__name__)
 
+# load data
+with open('allData.json',encoding='utf-8') as f:
+    alldata = json.load(f)
 
 # a simple page that says hello
 @app.route('/')
@@ -18,42 +21,68 @@ def hello():
     return hello_world
 
 
-# add person api
-@app.route("/showdemo", methods=["GET"])
+# get all item and box information
+@app.route("/getAllData", methods=["POST","GET"])
+@cross_origin()
+def getAllItemAndBoxAPI():
+    ''' get all item and box information '''
+    if flask.request.method == "POST":
+        alldata["Success"] = True
+        return flask.jsonify(alldata)
+    else :
+        return {"Success": False,"Reason":"can't use GET"}
+        return res
+
+
+# cal packing 
+@app.route("/calPacking", methods=["POST","GET"])
 @cross_origin()
 def mkResultAPI():
     '''
     '''
-    # init packer and mk box and item
-    packer,box = makeBoxAndItem()
-    # calculate packing
-    packer.pack(bigger_first=True,distribute_items=False,fix_point=True,binding=[],
-    number_of_decimals=0)
-
-    box = packer.bins[0]
-    # make box dict
-    box_r = makeDictBox(box)
-    # make item dict
-    fitItem,unfitItem = [],[]
-    for item in box.items:
-        fitItem.append(makeDictItem(item))
-    
-    for item in box.unfitted_items:
-        unfitItem.append(makeDictItem(item))
-
-    # for unitem in box
-    # make response
     res = {"Success": False}
-    if flask.request.method == "GET":
-        res["Success"] = True
-        res["data"] = {
-            "box" : box_r,
-            "fitItem" : fitItem,
-            "unfitItem": unfitItem
-        }
-    print(len(res["data"]["unfitItem"]))
-    
-    return flask.jsonify(res)
+    if flask.request.method == "POST":
+        q= eval(flask.request.data.decode('utf-8'))
+        if 'box' in q.keys() and 'item' in q.keys() and 'binding' in q.keys():
+            try :
+                packer,box,binding = getBoxAndItem(q)
+            except :
+                res["Reason"] = "input data err"
+                return res
+            try :
+                # calculate packing
+                packer.pack(bigger_first=True,distribute_items=False,fix_point=True,binding=binding,
+                number_of_decimals=0)
+                box = packer.bins[0]
+                # make box dict
+                box_r = makeDictBox(box)
+                # make item dict
+                fitItem,unfitItem = [],[]
+                for item in box.items:
+                    fitItem.append(makeDictItem(item))
+                
+                for item in box.unfitted_items:
+                    unfitItem.append(makeDictItem(item))
+
+                # for unfitem in box
+                # make response
+                res["Success"] = True
+                res["data"] = {
+                    "box" : box_r,
+                    "fitItem" : fitItem,
+                    "unfitItem": unfitItem
+                }
+                # print(len(res["data"]["unfitItem"]))
+                return res
+            except Exception as e:
+                res['Reason'] = 'cal packing err'
+                return res
+        else :
+            res['Reason'] = 'box or item not in input data'
+            return res
+    else :
+        res['Reason'] = 'method not POST'
+        return res
 
 
 def makeDictBox(box):
@@ -104,78 +133,61 @@ def makeDictItem(item):
     return r
 
 
-def makeBoxAndItem():
+def getBoxAndItem(data):
     ''' '''
-    # init packer , bin
+    # init packer
     packer = Packer()
-    # 長榮海運真實貨櫃(二十呎鋼製乾貨貨櫃) 單位 公分/公斤
-    box = Bin(partno='Bin',WHD=(590,244,260),max_weight=28080,corner=15)
+    # get bin data
+    box_data = data["box"][0]
+    box = Bin(
+        partno=box_data['name'],
+        WHD=box_data['WHD'],
+        max_weight=box_data['weight'],
+        corner=box_data['coner'],
+        put_type=box_data['openTop'][0]
+        )
     packer.addBin(box)
-
-    # 一台 dyson DC34 為20.5 * 11.5 * 32.2 (1.33kg)
-    # 一箱 假設為64個 , 為 82 * 46 * 170 (85.12)
-    for i in range(7): 
-        packer.addItem(Item(
-            partno='Dyson DC34 Animal{}'.format(str(i+1)),
-            name='Dyson', 
-            typeof='cylinder',
-            WHD=(170, 82, 46), 
-            weight=85.12,
-            level=1,
-            loadbear=100,
-            updown=True,
-            color='#FF0000')
+    # get item data
+    item_data = data["item"]
+    color_dict = {
+        1:'red',
+        2:'yellow',
+        3:'blue',
+        4:'green',
+        5:'purple',
+        6:'brown',
+        7:'orange'
+    }
+    for i in item_data :
+        for j in range(i['count']) :
+            packer.addItem(Item(
+            partno = i['name']+'-{}'.format(str(j+1)),
+            name = i['name'],
+            typeof = 'cylinder' if i['type'] == 2 else 'cube',
+            WHD = i['WHD'], 
+            weight = i['weight'],
+            level = 1 if i['level'] == 0 else 2,
+            loadbear = i['loadbear'],
+            updown = bool(i['updown']),
+            color = color_dict[i['color']])
         )
-    
-    # 洗衣機 一箱一個 850 * 600 *600 (10 kG)
-    for i in range(18):
-        packer.addItem(Item(
-            partno='wash{}'.format(str(i+1)),
-            name='wash',
-            typeof='cube',
-            WHD=(85, 60, 60), 
-            weight=10,
-            level=1,
-            loadbear=100,
-            updown=True,
-            color='#FFFF37'
-        ))
+    binding_data = data['binding']
+    binding = []
+    if len(binding_data) != 0:
+        for i in binding_data :
+            binding.append(tuple(i))
 
-    # 42U 標準機櫃 : 一箱一個
-    for i in range(15):
-        packer.addItem(Item(
-            partno='Cabinet{}'.format(str(i+1)),
-            name='cabint',
-            typeof='cube',
-            WHD=(60, 80, 200), 
-            weight=80,
-            level=1,
-            loadbear=100,
-            updown=True,
-            color='#842B00')
-        )
-
-    # 伺服器 : 一箱一個
-    for i in range(42):
-        packer.addItem(Item(
-            partno='Server{}'.format(str(i+1)),
-            name='server', 
-            typeof='cube',
-            WHD=(70, 100, 30), 
-            weight=20,
-            level=1,
-            loadbear=100,
-            updown=True,
-            color='#0000E3')
-        )
-    
-    
-    return packer,box
+    return packer,box,binding
 
 
 
 
 if __name__ == "__main__":
+    '''
+    1. get all item
+    2. return choose item
+    3. return result
+    '''
 
     # start the web server
     print("* Starting web service...")

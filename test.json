@@ -1,0 +1,121 @@
+{
+    "Success": true,
+    "data": {
+        "box": [
+            {
+                "WHD": [
+                    1203,
+                    235,
+                    238
+                ],
+                "gravity": [
+                    26.37,
+                    25.95,
+                    27.88,
+                    19.79
+                ],
+                "partNumber": "40呎鋼製貨櫃",
+                "position": [
+                    601.5,
+                    117.5,
+                    119.0
+                ],
+                "weight": 26480
+            }
+        ],
+        "fitItem": [
+            {
+                "WHD": [
+                    15,
+                    15,
+                    15
+                ],
+                "color": "#000000",
+                "name": "corner",
+                "partNumber": "corner0",
+                "position": [
+                    7,
+                    7,
+                    7
+                ],
+                "rotationType": 0,
+                "type": "cube",
+                "weight": 0
+            },
+            {
+                "WHD": [
+                    170,
+                    82,
+                    46
+                ],
+                "color": "red",
+                "name": "Dyson_DC34_Animal",
+                "partNumber": "Dyson_DC34_Animal-13",
+                "position": [
+                    935,
+                    123,
+                    23
+                ],
+                "rotationType": 0,
+                "type": "cube",
+                "weight": 85
+            },
+            {
+                "WHD": [
+                    70,
+                    100,
+                    30
+                ],
+                "color": "green",
+                "name": "Dell_R740",
+                "partNumber": "Dell_R740-7",
+                "position": [
+                    895,
+                    50,
+                    61
+                ],
+                "rotationType": 0,
+                "type": "cube",
+                "weight": 20
+            }
+        ],
+        "unfitItem": [
+            {
+                "WHD": [
+                    152,
+                    75,
+                    152
+                ],
+                "color": "orange",
+                "name": "Wood_Table",
+                "partNumber": "Wood_Table-8",
+                "position": [
+                    76,
+                    37,
+                    76
+                ],
+                "rotationType": 5,
+                "type": "cube",
+                "weight": 70
+            },
+            {
+                "WHD": [
+                    152,
+                    75,
+                    152
+                ],
+                "color": "orange",
+                "name": "Wood_Table",
+                "partNumber": "Wood_Table-9",
+                "position": [
+                    76,
+                    37,
+                    76
+                ],
+                "rotationType": 5,
+                "type": "cube",
+                "weight": 70
+            }
+        ]
+    }
+}
