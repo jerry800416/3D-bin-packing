@@ -386,12 +386,12 @@ class Packer:
         r = []
         for i in self.bins:
             # open top container
-            if i.put_type == 1:
+            if i.put_type == 2:
                 i.items.sort(key=lambda item: item.position[0], reverse=False)
                 i.items.sort(key=lambda item: item.position[1], reverse=False)
                 i.items.sort(key=lambda item: item.position[2], reverse=False)
             # general container
-            elif i.put_type == 0:
+            elif i.put_type == 1:
                 i.items.sort(key=lambda item: item.position[1], reverse=False)
                 i.items.sort(key=lambda item: item.position[2], reverse=False)
                 i.items.sort(key=lambda item: item.position[0], reverse=False)
