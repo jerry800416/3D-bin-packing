@@ -79,7 +79,7 @@ class Item:
 
 
 class Bin:
-    def __init__(self, partno, WHD, max_weight,corner=0,put_type=0):
+    def __init__(self, partno, WHD, max_weight,corner=0,put_type=1):
         ''' '''
         self.partno = partno
         self.width = WHD[0]
