@@ -8,3 +8,4 @@ venv
 test
 setup.py
 venv
+debug.log
