@@ -166,7 +166,7 @@ def getBoxAndItem(data):
             typeof = 'cylinder' if i['type'] == 2 else 'cube',
             WHD = i['WHD'], 
             weight = i['weight'],
-            level = 1 if i['level'] == 0 else 2,
+            level = 1 if i['level'] == 1 else 2,
             loadbear = i['loadbear'],
             updown = bool(i['updown']),
             color = color_dict[i['color']])
