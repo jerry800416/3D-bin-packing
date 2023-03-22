@@ -1,0 +1,173 @@
+{
+    "box": [
+        {
+            "name": "20呎鋼製貨櫃",
+            "WHD": [
+                589,
+                235,
+                238
+            ],
+            "weight": 28080,
+            "openTop": [
+                1,
+                2
+            ],
+            "coner": 15
+        },
+        {
+            "name": "40呎鋼製貨櫃",
+            "WHD": [
+                1203,
+                235,
+                238
+            ],
+            "weight": 26480,
+            "openTop": [
+                1,
+                2
+            ],
+            "coner": 15
+        },
+        {
+            "name": "40呎超高貨櫃",
+            "WHD": [
+                1203,
+                235,
+                269
+            ],
+            "weight": 26280,
+            "openTop": [
+                1,
+                2
+            ],
+            "coner": 15
+        },
+        {
+            "name": "45呎超高貨櫃",
+            "WHD": [
+                1355,
+                235,
+                270
+            ],
+            "weight": 27800,
+            "openTop": [
+                1
+            ],
+            "coner": 15
+        }
+    ],
+    "item": [
+        {
+            "name": "AEHHXV060005YH10",
+            "description" : "5HP,1200RPM,230/460V,215T,TEFC",
+            "WHD": [
+                170,
+                82,
+                46
+            ],
+            "count": 15,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 100,
+            "weight": 85,
+            "color": 1
+        },
+        {
+            "name": "AEEAGD060040FH011",
+            "description" : "40HP,1200RPM 230-460V 364T,RB",
+            "WHD": [
+                85,
+                60,
+                60
+            ],
+            "count": 18,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 100,
+            "weight": 30,
+            "color": 2
+        },
+        {
+            "name": "AEEAGD060400CE10Z",
+            "description" : "400HP,1200RPM,460V,586/7UZ,TEFC",
+            "WHD": [
+                60,
+                80,
+                200
+            ],
+            "count": 15,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 10,
+            "weight": 30,
+            "color": 3
+        },
+        {
+            "name": "31102B576X108",
+            "description" : "FC150 AEEFPA160(L)",
+            "WHD": [
+                70,
+                100,
+                30
+            ],
+            "count": 42,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 100,
+            "weight": 20,
+            "color": 4
+        },
+        {
+            "name": "AEHHXV047R50YH10",
+            "description" : "7.5HP,1800RPM,230/460V,213T,TEFC",
+            "WHD": [
+                80,
+                80,
+                120
+            ],
+            "count": 100,
+            "updown": 0,
+            "type": 2,
+            "level": 0,
+            "loadbear": 50,
+            "weight": 170,
+            "color": 5
+        },
+        {
+            "name": "AEEHED040150YD002",
+            "description" : "150HP,1800RPM,460V,445VP",
+            "WHD": [
+                60,
+                40,
+                50
+            ],
+            "count": 80,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 40,
+            "weight": 30,
+            "color": 6
+        },
+        {
+            "name": "AEUHXG041R50YH10C",
+            "description" : "1.5HP,1800RPM,230/460V,145TC,TEXP",
+            "WHD": [
+                152,
+                152,
+                75
+            ],
+            "count": 10,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 50,
+            "weight": 70,
+            "color": 7
+        }
+    ]
+}

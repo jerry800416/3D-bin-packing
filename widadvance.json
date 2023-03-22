@@ -1,0 +1,397 @@
+{
+    "box": [
+        {
+            "name": "20呎鋼製貨櫃",
+            "WHD": [
+                589,
+                235,
+                238
+            ],
+            "weight": 28080,
+            "openTop": [
+                1,
+                2
+            ],
+            "coner": 15
+        },
+        {
+            "name": "40呎鋼製貨櫃",
+            "WHD": [
+                1203,
+                235,
+                238
+            ],
+            "weight": 26480,
+            "openTop": [
+                1,
+                2
+            ],
+            "coner": 15
+        },
+        {
+            "name": "40呎超高貨櫃",
+            "WHD": [
+                1203,
+                235,
+                269
+            ],
+            "weight": 26280,
+            "openTop": [
+                1,
+                2
+            ],
+            "coner": 15
+        },
+        {
+            "name": "45呎超高貨櫃",
+            "WHD": [
+                1355,
+                235,
+                270
+            ],
+            "weight": 27800,
+            "openTop": [
+                1
+            ],
+            "coner": 15
+        }
+    ],
+    "item": [
+        {
+            "name": "YM-7002-2 沖孔機(1)",
+            "description" : "VAMP PERFORATING MACHINE",
+            "WHD": [
+                119,
+                148,
+                155
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 300,
+            "color": 1
+        },
+        {
+            "name": "YM-7002-2 沖孔機(2)",
+            "description" : "VAMP PERFORATING MACHINE",
+            "WHD": [
+                119,
+                82,
+                155
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 300,
+            "color": 2
+        },
+        {
+            "name": "YM-7008-7D 靜音式集塵磨鞋台",
+            "description" : "OISELESS SHOES ROUNGHING & DUST COLLECT MACHINE",
+            "WHD": [
+                175,
+                140,
+                165
+            ],
+            "count": 2,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 660,
+            "color": 3
+        },
+        {
+            "name": "YM-7012 鞋面壓熨機(1)",
+            "description" : "VAMP IRONING MACHINE",
+            "WHD": [
+                151,
+                120,
+                165
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 610,
+            "color": 4
+        },
+        {
+            "name": "YM-7012 鞋面壓熨機(2)",
+            "description" : "VAMP IRONING MACHINE",
+            "WHD": [
+                125,
+                85,
+                165
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 315,
+            "color": 5
+        },
+        {
+            "name": "YM-7050 壓鞋墊機",
+            "description" : "FOOT PAD EXTRUDING MACHINE",
+            "WHD": [
+                70,
+                75,
+                145
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 170,
+            "color": 6
+        },
+        {
+            "name": "YM-7055 劃線機(1)",
+            "description" : "SCRIBING MACHINE",
+            "WHD": [
+                165,
+                79,
+                74
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 205,
+            "color": 7
+        },
+        {
+            "name": "YM-7055 劃線機(2)",
+            "description" : "SCRIBING MACHINE",
+            "WHD": [
+                125,
+                107,
+                164
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 325,
+            "color": 8
+        },
+        {
+            "name": "YM-7057 油壓拔楦機",
+            "description" : "HYDRAULIC LAST SLIPPING MACHEINE",
+            "WHD": [
+                140,
+                88,
+                130
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 372,
+            "color": 9
+        },
+        {
+            "name": "YM-7058 油壓前後成型機",
+            "description" : "TOE-QUARTER SHAPING MACHINE",
+            "WHD": [
+                136,
+                143,
+                145
+            ],
+            "count": 2,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 740,
+            "color": 10
+        },
+        {
+            "name": "YM-7060-6PC 後踵定型機-雙冷雙熱",
+            "description" : "BACKPART MOULDING MACHINE WITH AIR BAG - 2 COOLERS & 2 HEATs",
+            "WHD": [
+                164,
+                97,
+                225
+            ],
+            "count": 5,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 607,
+            "color": 11
+        },
+        {
+            "name": "YM-7062B 油壓自動平衡壓底機(1)",
+            "description" : "AUTOMATIC UPPER MOLDING MACHINE",
+            "WHD": [
+                160,
+                84,
+                189
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 990,
+            "color": 12
+        },
+        {
+            "name": "YM-7062B 油壓自動平衡壓底機(2)",
+            "description" : "AUTOMATIC UPPER MOLDING MACHINE",
+            "WHD": [
+                85,
+                89,
+                189
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 505,
+            "color": 13
+        },
+        {
+            "name": "YM-7106 真空劃線模製作機",
+            "description" : "MOULD LINE DRAWING MACHINE",
+            "WHD": [
+                146,
+                70,
+                117
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 180,
+            "color": 14
+        },
+        {
+            "name": "YM-915D 靜音集塵活動打粗機",
+            "description" : "NOISELESS DUST COOLECTING & ROUGHING MACHINE",
+            "WHD": [
+                150,
+                110,
+                160
+            ],
+            "count": 22,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 446,
+            "color": 15
+        },
+        {
+            "name": "YM-915D-1 變頻活動打粗機",
+            "description" : "NOISELESS DUST COOLECTING & ROUGHING MACHINE",
+            "WHD": [
+                182,
+                120,
+                145
+            ],
+            "count": 3,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 455,
+            "color": 16
+        },
+        {
+            "name": "YM-918D 靜音集塵電動磨邊機",
+            "description" : "VAMP EDGE TRIMMING MACHINE",
+            "WHD": [
+                139,
+                105,
+                165
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 512,
+            "color": 17
+        },
+        {
+            "name": "YM-925D 集塵磨粗機",
+            "description" : "NOISELESS DUST-COLLECTING ROUGHING MACHINE",
+            "WHD": [
+                175,
+                125,
+                165
+            ],
+            "count": 16,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 700,
+            "color": 18
+        },
+        {
+            "name": "YM-953D 靜音集塵砂輪式磨景機",
+            "description" : "EMERY WHEEL BEVELING MACHINE",
+            "WHD": [
+                140,
+                135,
+                155
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 480,
+            "color": 19
+        },
+        {
+            "name": "YM-965D 靜音集塵式立心研磨機(1)",
+            "description" : "VERTICAL SPINDLE EDGE GRINDING MACHINE(NOISELESS DUST CONTAINER TYPE)",
+            "WHD": [
+                155,
+                134,
+                170
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 675,
+            "color": 20
+        },
+        {
+            "name": "YM-965D 靜音集塵式立心研磨機(2)",
+            "description" : "VERTICAL SPINDLE EDGE GRINDING MACHINE(NOISELESS DUST CONTAINER TYPE)",
+            "WHD": [
+                139,
+                85,
+                170
+            ],
+            "count": 1,
+            "updown": 1,
+            "type": 1,
+            "level": 0,
+            "loadbear": 9999,
+            "weight": 350,
+            "color": 21
+        }
+    ]
+}
