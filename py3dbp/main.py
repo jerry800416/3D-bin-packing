@@ -6,12 +6,14 @@ from matplotlib.patches import Rectangle,Circle
 import matplotlib.pyplot as plt
 import mpl_toolkits.mplot3d.art3d as art3d
 from collections import Counter
+import copy
 DEFAULT_NUMBER_OF_DECIMALS = 0
 START_POSITION = [0, 0, 0]
 
 
 
 class Item:
+
     def __init__(self, partno,name,typeof, WHD, weight, level, loadbear, updown, color):
         ''' '''
         self.partno = partno
@@ -33,6 +35,7 @@ class Item:
         self.position = START_POSITION
         self.number_of_decimals = DEFAULT_NUMBER_OF_DECIMALS
 
+
     def formatNumbers(self, number_of_decimals):
         ''' '''
         self.width = set2Decimal(self.width, number_of_decimals)
@@ -41,6 +44,7 @@ class Item:
         self.weight = set2Decimal(self.weight, number_of_decimals)
         self.number_of_decimals = number_of_decimals
 
+
     def string(self):
         ''' '''
         return "%s(%sx%sx%s, weight: %s) pos(%s) rt(%s) vol(%s)" % (
@@ -48,15 +52,18 @@ class Item:
             self.position, self.rotation_type, self.getVolume()
         )
 
+
     def getVolume(self):
         ''' '''
         return set2Decimal(self.width * self.height * self.depth, self.number_of_decimals)
+
 
     def getMaxArea(self):
         ''' '''
         a = sorted([self.width,self.height,self.depth],reverse=True) if self.updown == True else [self.width,self.height,self.depth]
     
         return set2Decimal(a[0] * a[1] , self.number_of_decimals)
+
 
     def getDimension(self):
         ''' rotation type '''
@@ -78,7 +85,9 @@ class Item:
         return dimension
 
 
+
 class Bin:
+
     def __init__(self, partno, WHD, max_weight,corner=0,put_type=1):
         ''' '''
         self.partno = partno
@@ -92,9 +101,12 @@ class Bin:
         self.unfitted_items = []
         self.number_of_decimals = DEFAULT_NUMBER_OF_DECIMALS
         self.fix_point = False
+        self.check_stable = False
+        self.support_surface_ratio = 0
         self.put_type = put_type
         # used to put gravity distribution
         self.gravity = []
+
 
     def formatNumbers(self, number_of_decimals):
         ''' '''
@@ -104,6 +116,7 @@ class Bin:
         self.max_weight = set2Decimal(self.max_weight, number_of_decimals)
         self.number_of_decimals = number_of_decimals
 
+
     def string(self):
         ''' '''
         return "%s(%sx%sx%s, max_weight:%s) vol(%s)" % (
@@ -111,11 +124,13 @@ class Bin:
             self.getVolume()
         )
 
+
     def getVolume(self):
         ''' '''
         return set2Decimal(
             self.width * self.height * self.depth, self.number_of_decimals
         )
+
 
     def getTotalWeight(self):
         ''' '''
@@ -125,6 +140,7 @@ class Bin:
             total_weight += item.weight
 
         return set2Decimal(total_weight, self.number_of_decimals)
+
 
     def putItem(self, item, pivot,axis=None):
         ''' put item in bin '''
@@ -155,11 +171,8 @@ class Bin:
                 if self.getTotalWeight() + item.weight > self.max_weight:
                     fit = False
                     return fit
-
-                if item.partno == 'Dyson DC34 Animal8':
-                    print(123)
-                    # self.fix_point = False
-
+                
+                # fix point float prob
                 if self.fix_point == True :
                         
                     [w,h,d] = dimension
@@ -173,20 +186,53 @@ class Bin:
                         # fix depth
                         z = self.checkDepth([x,x+float(w),y,y+float(h),z,z+float(d)])
 
+                    # check stability on item 
+                    # rule : 
+                    # 1. Define a support ratio, if the ratio below the support surface does not exceed this ratio, compare the second rule.
+                    # 2. If there is no support under any vertices of the bottom of the item, then fit = False.
+                    if self.check_stable == True :
+                        # Cal the surface area of ​​item.
+                        item_area_lower = int(dimension[0] * dimension[1])
+                        # Cal the surface area of ​​the underlying support.
+                        support_area_upper = 0
+                        for i in self.fit_items:
+                            # Verify that the lower support surface area is greater than the upper support surface area * support_surface_ratio.
+                            if z == i[5]  :
+                                area = len(set([ j for j in range(int(x),int(x+int(w)))]) & set([ j for j in range(int(i[0]),int(i[1]))])) * \
+                                len(set([ j for j in range(int(y),int(y+int(h)))]) & set([ j for j in range(int(i[2]),int(i[3]))]))
+                                support_area_upper += area
+
+                        # If not , get four vertices of the bottom of the item.
+                        if support_area_upper / item_area_lower < self.support_surface_ratio :
+                            four_vertices = [[x,y],[x+float(w),y],[x,y+float(h)],[x+float(w),y+float(h)]]
+                            #  If any vertices is not supported, fit = False.
+                            c = [False,False,False,False]
+                            for i in self.fit_items:
+                                if z == i[5] :
+                                    for jdx,j in enumerate(four_vertices) :
+                                        if (i[0] <= j[0] <= i[1]) and (i[2] <= j[1] <= i[3]) :
+                                            c[jdx] = True
+                            if False in c :
+                                item.position = valid_item_position
+                                fit = False
+                                return fit
+                        
                     self.fit_items = np.append(self.fit_items,np.array([[x,x+float(w),y,y+float(h),z,z+float(d)]]),axis=0)
                     item.position = [set2Decimal(x),set2Decimal(y),set2Decimal(z)]
-                    
-                self.items.append(item)
 
-            if not fit:
+                if fit :
+                    self.items.append(copy.deepcopy(item))
+
+            else :
                 item.position = valid_item_position
 
             return fit
 
-        if not fit:
+        else :
             item.position = valid_item_position
 
         return fit
+
 
     def checkDepth(self,unfix_point):
         ''' fix item position z '''
@@ -209,6 +255,7 @@ class Bin:
                 return z_[j][1]
         return unfix_point[4]
 
+
     def checkWidth(self,unfix_point):
         ''' fix item position x ''' 
         x_ = [[0,0],[float(self.width),float(self.width)]]
@@ -230,6 +277,7 @@ class Bin:
                 return x_[j][1]
         return unfix_point[0]
     
+
     def checkHeight(self,unfix_point):
         '''fix item position y '''
         y_ = [[0,0],[float(self.height),float(self.height)]]
@@ -252,6 +300,7 @@ class Bin:
 
         return unfix_point[2]
 
+
     def addCorner(self):
         '''add container coner '''
         if self.corner != 0 :
@@ -272,6 +321,7 @@ class Bin:
                 corner_list.append(a)
             return corner_list
 
+
     def putCorner(self,info,item):
         '''put coner in bin '''
         fit = False
@@ -287,6 +337,7 @@ class Bin:
         self.fit_items = np.append(self.fit_items,np.array([corner]),axis=0)
         return
 
+
     def clearBin(self):
         ''' clear item which in bin '''
         self.items = []
@@ -295,6 +346,7 @@ class Bin:
 
 
 class Packer:
+
     def __init__(self):
         ''' '''
         self.bins = []
@@ -304,9 +356,11 @@ class Packer:
         self.binding = []
         # self.apex = []
 
+
     def addBin(self, bin):
         ''' '''
         return self.bins.append(bin)
+
 
     def addItem(self, item):
         ''' '''
@@ -314,10 +368,13 @@ class Packer:
 
         return self.items.append(item)
 
-    def pack2Bin(self, bin, item,fix_point):
+
+    def pack2Bin(self, bin, item,fix_point,check_stable,support_surface_ratio):
         ''' pack item to bin '''
         fitted = False
         bin.fix_point = fix_point
+        bin.check_stable = check_stable
+        bin.support_surface_ratio = support_surface_ratio
 
         # first put item on (0,0,0) , if corner exist ,first add corner in box. 
         if bin.corner != 0 and not bin.items:
@@ -352,6 +409,7 @@ class Packer:
         if not fitted:
             bin.unfitted_items.append(item)
 
+
     def sortBinding(self,bin):
         ''' sorted by binding '''
         b,front,back = [],[],[]
@@ -381,6 +439,7 @@ class Packer:
         self.items = front + sort_bind + back
         return
 
+
     def putOrder(self):
         '''Arrange the order of items '''
         r = []
@@ -399,14 +458,14 @@ class Packer:
                 pass
         return
 
-    # Deviation Of Cargo gravity distribution
-    def gravityCenter(self):
+
+    def gravityCenter(self,bin):
         ''' 
         Deviation Of Cargo gravity distribution
         ''' 
-        w = int(self.bins[0].width)
-        h = int(self.bins[0].height)
-        d = int(self.bins[0].depth)
+        w = int(bin.width)
+        h = int(bin.height)
+        d = int(bin.depth)
 
         area1 = [set(range(0,w//2+1)),set(range(0,h//2+1)),0]
         area2 = [set(range(w//2+1,w+1)),set(range(0,h//2+1)),0]
@@ -414,7 +473,7 @@ class Packer:
         area4 = [set(range(w//2+1,w+1)),set(range(h//2+1,h+1)),0]
         area = [area1,area2,area3,area4]
 
-        for i in self.bins[0].items:
+        for i in bin.items:
 
             x_st = int(i.position[0])
             y_st = int(i.position[1])
@@ -482,7 +541,8 @@ class Packer:
             result.append(round(i / sum(r) * 100,2))
         return result
 
-    def pack(self, bigger_first=False,distribute_items=False,fix_point=True,binding=[],number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS):
+
+    def pack(self, bigger_first=False,distribute_items=True,fix_point=True,check_stable=True,support_surface_ratio=0.75,binding=[],number_of_decimals=DEFAULT_NUMBER_OF_DECIMALS):
         '''pack master func '''
         # set decimals
         for bin in self.bins:
@@ -503,40 +563,49 @@ class Packer:
         if binding != []:
             self.sortBinding(bin)
 
-        for bin in self.bins:
+        for idx,bin in enumerate(self.bins):
             # pack item to bin
             for item in self.items:
-                self.pack2Bin(bin, item,fix_point)
-            # no used
-            if distribute_items :
-                for item in bin.items:
-                    self.items.remove(item)
-
-            for item in self.items.copy():
-                if item in bin.unfitted_items:
-                    self.items.remove(item)
+                self.pack2Bin(bin, item, fix_point, check_stable, support_surface_ratio)
 
             if binding != []:
                 # resorted
                 self.items.sort(key=lambda item: item.getVolume(), reverse=bigger_first)
                 self.items.sort(key=lambda item: item.loadbear, reverse=True)
                 self.items.sort(key=lambda item: item.level, reverse=False)
-                self.items = self.items + bin.unfitted_items
                 # clear bin
                 bin.items = []
                 bin.unfitted_items = self.unfit_items
                 bin.fit_items = np.array([[0,bin.width,0,bin.height,0,0]])
                 # repacking
                 for item in self.items:
-                    self.pack2Bin(bin, item,fix_point)
+                    self.pack2Bin(bin, item,fix_point,check_stable,support_surface_ratio)
+            
+            # Deviation Of Cargo Gravity Center 
+            self.bins[idx].gravity = self.gravityCenter(bin)
+
+            if distribute_items :
+                for bitem in bin.items:
+                    no = bitem.partno
+                    for item in self.items :
+                        if item.partno == no :
+                            self.items.remove(item)
+                            break
+
         # put order of items
         self.putOrder()
-        # Deviation Of Cargo Gravity Center 
-        self.bins[0].gravity = self.gravityCenter()
+
+        if self.items != []:
+            self.unfit_items = copy.deepcopy(self.items)
+            self.items = []
+        # for item in self.items.copy():
+        #     if item in bin.unfitted_items:
+        #         self.items.remove(item)
 
 
 
 class Painter:
+
     def __init__(self,bins):
         ''' '''
         self.items = bins.items
@@ -544,12 +613,13 @@ class Painter:
         self.height = bins.height
         self.depth = bins.depth
 
-    def _plotCube(self, ax, x, y, z, dx, dy, dz, color='red',mode=2):
+
+    def _plotCube(self, ax, x, y, z, dx, dy, dz, color='red',mode=2,linewidth=1):
         """ Auxiliary function to plot a cube. code taken somewhere from the web.  """
         xx = [x, x, x+dx, x+dx, x]
         yy = [y, y+dy, y+dy, y, y]
         
-        kwargs = {'alpha': 1, 'color': color,'linewidth':1 }
+        kwargs = {'alpha': 1, 'color': color,'linewidth':linewidth }
         if mode == 1 :
             ax.plot3D(xx, yy, [z]*5, **kwargs)
             ax.plot3D(xx, yy, [z+dz]*5, **kwargs)
@@ -558,24 +628,31 @@ class Painter:
             ax.plot3D([x+dx, x+dx], [y+dy, y+dy], [z, z+dz], **kwargs)
             ax.plot3D([x+dx, x+dx], [y, y], [z, z+dz], **kwargs)
         else :
-            p = Rectangle((x,y),dx,dy,fc=color,ec='black')
-            p2 = Rectangle((x,y),dx,dy,fc=color,ec='black')
-            p3 = Rectangle((y,z),dy,dz,fc=color,ec='black')
-            p4 = Rectangle((y,z),dy,dz,fc=color,ec='black')
-            p5 = Rectangle((x,z),dx,dz,fc=color,ec='black')
-            p6 = Rectangle((x,z),dx,dz,fc=color,ec='black')
+            p = Rectangle((x,y),dx,dy,fc=color,ec='black',alpha = .8)
+            p2 = Rectangle((x,y),dx,dy,fc=color,ec='black',alpha = .8)
+            p3 = Rectangle((y,z),dy,dz,fc=color,ec='black',alpha = .8)
+            p4 = Rectangle((y,z),dy,dz,fc=color,ec='black',alpha = .8)
+            p5 = Rectangle((x,z),dx,dz,fc=color,ec='black',alpha = .8)
+            p6 = Rectangle((x,z),dx,dz,fc=color,ec='black',alpha = .8)
             ax.add_patch(p)
             ax.add_patch(p2)
             ax.add_patch(p3)
             ax.add_patch(p4)
             ax.add_patch(p5)
             ax.add_patch(p6)
+            
+            rx, ry = p.get_xy()
+            cx = rx + p.get_width()/2.0
+            cy = ry + p.get_height()/2.0
+            ax.annotate("Rectangle", (cx, cy), color='black', weight='bold', fontsize=10, ha='center', va='center')
+
             art3d.pathpatch_2d_to_3d(p, z=z, zdir="z")
             art3d.pathpatch_2d_to_3d(p2, z=z+dz, zdir="z")
             art3d.pathpatch_2d_to_3d(p3, z=x, zdir="x")
             art3d.pathpatch_2d_to_3d(p4, z=x + dx, zdir="x")
             art3d.pathpatch_2d_to_3d(p5, z=y, zdir="y")
             art3d.pathpatch_2d_to_3d(p6, z=y + dy, zdir="y")
+
 
     def _plotCylinder(self, ax, x, y, z, dx, dy, dz, color='red',mode=2):
         """ Auxiliary function to plot a Cylinder  """
@@ -595,10 +672,14 @@ class Painter:
         z_grid = z_grid + z
         ax.plot_surface(x_grid, y_grid, z_grid,shade=False,fc=color,ec='black',alpha=1,color=color)
         
+
     def plotBoxAndItems(self,title=""):
         """ side effective. Plot the Bin and the items it contains. """
         fig = plt.figure()
         axGlob = plt.axes(projection='3d')
+        
+        # plot bin 
+        self._plotCube(axGlob,0, 0, 0, float(self.width), float(self.height), float(self.depth),color='black',mode=1,linewidth=2)
 
         counter = 0
         # fit rotation type
@@ -615,12 +696,12 @@ class Painter:
                 self._plotCylinder(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
             
             counter = counter + 1  
-        # plot bin 
-        self._plotCube(axGlob,0, 0, 0, float(self.width), float(self.height), float(self.depth),color='black',mode=1)
 
-        plt.title('result')
+        
+        plt.title(title)
         self.setAxesEqual(axGlob)
-        plt.show()
+        return plt
+
 
     def setAxesEqual(self,ax):
         '''Make axes of 3D plot have equal scale so that spheres appear as spheres,

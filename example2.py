@@ -2,6 +2,12 @@ from py3dbp import Packer, Bin, Item, Painter
 import time
 start = time.time()
 
+'''
+
+This case is used to demonstrate an example of a packing complex situation.
+
+'''
+
 # init packing function
 packer = Packer()
 #  init bin
@@ -40,7 +46,14 @@ packer.addItem(Item('test29', 'test','cube',(4, 5, 10), 1, 1, 100, True,'olive')
 packer.addItem(Item('test30', 'test','cube',(10, 10, 2), 1, 1, 100, True,'darkgreen'))
 
 # calculate packing 
-packer.pack(bigger_first=True,distribute_items=100,fix_point=True,number_of_decimals=0)
+packer.pack(
+    bigger_first=True,
+    distribute_items=100,
+    fix_point=True,
+    check_stable=True,
+    support_surface_ratio=0.75,
+    number_of_decimals=0
+)
 
 # print result
 b = packer.bins[0]
@@ -83,4 +96,5 @@ print('used time : ',stop - start)
 
 # draw results
 painter = Painter(b)
-painter.plotBoxAndItems()
+fig = painter.plotBoxAndItems(title=b.partno)
+fig.show()

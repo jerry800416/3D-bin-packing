@@ -4,7 +4,7 @@ start = time.time()
 
 '''
 
-This example can be used to test large batch calculation time and binding functions.
+This example can be used to compare the fix_point function with and without the fix_point function.
 
 '''
 
@@ -14,7 +14,7 @@ packer = Packer()
 # Evergreen Real Container (20ft Steel Dry Cargo Container)
 # Unit cm/kg
 box = Bin(
-    partno='example4',
+    partno='example0',
     WHD=(589.8,243.8,259.1),
     max_weight=28080,
     corner=15,
@@ -25,7 +25,7 @@ packer.addBin(box)
 
 # dyson DC34 (20.5 * 11.5 * 32.2 ,1.33kg)
 # 64 pcs per case ,  82 * 46 * 170 (85.12)
-for i in range(15): 
+for i in range(5): 
     packer.addItem(Item(
         partno='Dyson DC34 Animal{}'.format(str(i+1)),
         name='Dyson', 
@@ -40,7 +40,7 @@ for i in range(15):
 
 # washing machine (85 * 60 *60 ,10 kG)
 # 1 pcs per case, 85 * 60 *60 (10)
-for i in range(18):
+for i in range(10):
     packer.addItem(Item(
         partno='wash{}'.format(str(i+1)),
         name='wash',
@@ -55,7 +55,7 @@ for i in range(18):
 
 # 42U standard cabinet (60 * 80 * 200 , 80 kg)
 # one per box, 60 * 80 * 200 (80)
-for i in range(15):
+for i in range(5):
     packer.addItem(Item(
         partno='Cabinet{}'.format(str(i+1)),
         name='cabint',
@@ -70,7 +70,7 @@ for i in range(15):
 
 # Server (70 * 100 * 30 , 20 kg) 
 # one per box , 70 * 100 * 30 (20)
-for i in range(42):
+for i in range(10):
     packer.addItem(Item(
         partno='Server{}'.format(str(i+1)),
         name='server',
@@ -88,11 +88,9 @@ for i in range(42):
 packer.pack(
     bigger_first=True,
     distribute_items=False,
-    fix_point=True,
-    check_stable=True,
+    fix_point=False, # Try switching fix_point=True/False to compare the results
+    check_stable=False,
     support_surface_ratio=0.75,
-    # binding=[('server','cabint','wash')],
-    # binding=['cabint','wash','server'],
     number_of_decimals=0
 )
 

@@ -1,12 +1,17 @@
-标题 :
-取得所有貨櫃和貨物API
- 目录 :
-0
-  
- 
-   
-  
- 
+
+# API DOC
+
+### Outline
+- [API DOC](#api-doc)
+    - [Outline](#outline)
+    - [getAllData (TODO)](#getalldata-todo)
+    - [calPacking](#calpacking)
+
+
+
+### getAllData (TODO)
+
+```
             "level":0,
             "loadbear":50,
             "weight":170,
@@ -37,33 +42,33 @@
     ]
 }
 ```
-​
-----------------------------------------------
+
 **出參說明：**
+
+參數名|類型|說明|詳細
+:-----:  |:-----:|:-----: |:-----:                      
+**box** |**Object **  |**貨櫃信息** |**包含name,weight,openTop,coner** 
+<font color="red">name</font> | String  |貨櫃名稱 | 貨櫃顯示名稱(唯一值)  
+<font color="red">WHD</font> | Array(int)  |貨櫃長寬高 | 貨櫃長寬高  
+<font color="red">weight</font> |  Integer  |該貨櫃最大可承受重量 |單位為KG
+openTop | Array  |該貨櫃支持的開門型態 |1代表可一般側開，2代表可頂開 
+coner | int  |角件邊長大小 |0代表無角件，1開始有角件，單位為公分 
+**item** | **Object**  |**物品信息** |**name,count,updown,type,level,loadbear,weight,color** 
+<font color="red">name</font> | String  |貨物名稱 | 貨物顯示名稱(唯一值)  
+count | Integer  |該貨物數量 |單位為個 
+updown | Integer  |該貨物是否可以倒放 |0: false，1 : true 
+<font color="red">type</font> | Integer  |該物品型態 |1:立方體, 2: 圓柱體  
+level | Integer  | 該物品是否必須裝箱 | 0: false，1 : true 
+<font color="red">loadbear</font> | Integer  | 該物品承受重量 | 單位為公斤 
+<font color="red">weight</font> | Integer  | 該物品重量 | 單位為公斤 
+color | Integer  |物品顯示顏色 |1:紅2:黃3:藍4:綠5:紫6:棕7:橙 
 ​
-|參數名|類型|說明|詳細|
-|:-----  |:-----|-----                           |
-|**box** |**Object **  |**貨櫃信息** |**包含name,weight,openTop,coner** |
-|<font color="red">name</font> | String  |貨櫃名稱 | 貨櫃顯示名稱(唯一值)  |
-|<font color="red">WHD</font> | Array(int)  |貨櫃長寬高 | 貨櫃長寬高  |
-|<font color="red">weight</font> |  Integer  |該貨櫃最大可承受重量 |單位為KG|
-|openTop | Array  |該貨櫃支持的開門型態 |1代表可一般側開，2代表可頂開 |
-|coner | int  |角件邊長大小 |0代表無角件，1開始有角件，單位為公分 |
-|**item** | **Object**  |**物品信息** |**name,count,updown,type,level,loadbear,weight,color** |
-|<font color="red">name</font> | String  |貨物名稱 | 貨物顯示名稱(唯一值)  |
-|count | Integer  |該貨物數量 |單位為個 |
-|updown | Integer  |該貨物是否可以倒放 |0: false，1 : true |
-|<font color="red">type</font> | Integer  |該物品型態 |1:立方體, 2: 圓柱體  |
-|level | Integer  | 該物品是否必須裝箱 | 0: false，1 : true |
-|<font color="red">loadbear</font> | Integer  | 該物品承受重量 | 單位為公斤 |
-|<font color="red">weight</font> | Integer  | 該物品重量 | 單位為公斤 |
-|color | Integer  |物品顯示顏色 |1:紅2:黃3:藍4:綠5:紫6:棕7:橙 |
-​
-​
- **備註**
+**備註**
 此出參結構和前端要返回計算的結構相同
 紅色字體代表不能夠讓user修改的值，其餘可以讓user修改
 
+
+### calPacking
 
 **簡要描述：**
 
@@ -77,8 +82,7 @@
 **請求方式：**
 - POST
 
-
- **入參實例**
+**入參實例**
 ```
 {
     "box": [
@@ -180,8 +184,8 @@
 
 **入參說明：**
 
-|參數名|類型|說明|詳細|
-|:-----  |:-----|-----                           |
+參數名|類型|說明|詳細
+:-----:  |:-----:|:-----:|:-----:
 |**box** |**Object **  |**貨櫃信息** |**包含name,weight,openTop,coner** |
 |name| String  |貨櫃名稱 | 貨櫃顯示名稱(唯一值)  |
 |WHD | Array(int)  |貨櫃長寬高 | 貨櫃長寬高  |
@@ -199,12 +203,7 @@
 |color | Integer  |物品顯示顏色 |1:紅2:黃3:藍4:綠5:紫6:棕7:橙 |
 |**binding** | **Array**  |**物品綁定數量** |**array** |
 
-
-
----
- **出參實例1**
-
-出參
+**出參實例**
 ```
 {
     "Success": true,
@@ -329,11 +328,10 @@
 }
 ```
 
-----------------------------------------------
 **出參說明：**
 
 |參數名|類型|說明|詳細|
-|:-----  |:-----|-----                           |
+|:-----:  |:-----:|:-----:|:-----:|
 |Success | bool  | 呼叫API成功或失敗 |true 代表入參正確且系統正常運作，false 代表入參錯誤或是系統問題 |
 |data |Object   |前端需要的詳細訊息 |包含box,fitItem,unfitItem |
 |**box** | **Array**  |**貨櫃資訊** |**包含WHD,position,partNumber,weight**|
@@ -351,7 +349,6 @@
 |name | string  | 該物品類型名稱 |  |
 |type | string  | 該物品是立方體還是圓柱體 |cube 代表方，cylinder代表圓柱體  |
 |weight | int  |物品重量 |單位為公斤 |
-
 
  **備註**
 unfitItem 參數和 fitItem 相同

@@ -16,7 +16,16 @@ with open('widadvance.json',encoding='utf-8') as f:
 def hello():
 
     hello_world = '''
-    welcome to 3D packing prob API_1.0
+    welcome to 3D packing prob API_1.1 <br>
+    <br>
+    <br>
+    update 1.1  : <br>
+
+    Added stability rule : <br>
+    1. Define a support ratio, if the ratio below the support surface does not exceed this ratio, compare the second rule.<br>
+    2. If there is no support under any vertices of the bottom of the item, then fit = False.<br>
+
+
     '''
     return hello_world
 
@@ -31,11 +40,10 @@ def getAllItemAndBoxAPI():
         return flask.jsonify(alldata)
     else :
         return {"Success": False,"Reason":"can't use GET"}
-        return res
 
 
 # cal packing 
-@app.route("/calPacking", methods=["POST","GET"])
+@app.route("/calPacking", methods=["POST"])
 @cross_origin()
 def mkResultAPI():
     '''

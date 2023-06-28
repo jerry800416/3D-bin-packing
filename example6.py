@@ -4,23 +4,28 @@ start = time.time()
 
 '''
 
-This example is used to demonstrate that the algorithm does not optimize.
+Check stability on item - second rule
+1. If the ratio below the support surface does not exceed this ratio, then check the second rule.
+2. If there is no support under any of the bottom four vertices of the item, then remove the item.
 
 '''
 
 # init packing function
 packer = Packer()
 #  init bin 
-box = Bin('example3', (6, 1, 5), 100,0,put_type=0)
+box = Bin('example6', (5, 4, 7), 100,0,0)
 #  add item
 # Item('item partno', (W,H,D), Weight, Packing Priority level, load bear, Upside down or not , 'item color')
 packer.addBin(box)
-# If all item WHD=(2, 1, 3) , item can be fully packed into box, but if choose one item and modify WHD=(3, 1, 2) , item can't be fully packed into box.
-packer.addItem(Item(partno='Box-1',name='test',typeof='cube', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='yellow'))
-packer.addItem(Item(partno='Box-2',name='test',typeof='cube', WHD=(3, 1, 2), weight=1, level=1,loadbear=100, updown=True, color='pink')) # Try switching WHD=(3, 1, 2) and (2, 1, 3) to compare the results
-packer.addItem(Item(partno='Box-3',name='test',typeof='cube', WHD=(2, 1, 3), weight=1,level= 1,loadbear=100, updown=True, color='brown'))
-packer.addItem(Item(partno='Box-4',name='test',typeof='cube', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='cyan'))
-packer.addItem(Item(partno='Box-5',name='test',typeof='cube', WHD=(2, 1, 3), weight=1, level=1,loadbear=100, updown=True, color='olive'))
+packer.addItem(Item(partno='Box-1', name='test', typeof='cube', WHD=(5, 4, 1), weight=1, level=1,loadbear=100, updown=True, color='yellow'))
+packer.addItem(Item(partno='Box-2', name='test', typeof='cube', WHD=(1, 1, 4), weight=1, level=2,loadbear=100, updown=True, color='olive'))
+packer.addItem(Item(partno='Box-3', name='test', typeof='cube', WHD=(3, 4, 2), weight=1, level=3,loadbear=100, updown=True, color='pink'))
+packer.addItem(Item(partno='Box-4', name='test', typeof='cube', WHD=(1, 1, 4), weight=1, level=4,loadbear=100, updown=True, color='olive'))
+packer.addItem(Item(partno='Box-5', name='test', typeof='cube', WHD=(1, 2, 1), weight=1, level=5,loadbear=100, updown=True, color='pink'))
+packer.addItem(Item(partno='Box-6', name='test', typeof='cube', WHD=(1, 2, 1), weight=1, level=6,loadbear=100, updown=True, color='pink'))
+packer.addItem(Item(partno='Box-7', name='test', typeof='cube', WHD=(1, 1, 4), weight=1, level=7,loadbear=100, updown=True, color='olive'))
+packer.addItem(Item(partno='Box-8', name='test', typeof='cube', WHD=(1, 1, 4), weight=1, level=8,loadbear=100, updown=True, color='olive'))# Try switching WHD=(1, 1, 3) and (1, 1, 4) to compare the results
+packer.addItem(Item(partno='Box-9', name='test', typeof='cube', WHD=(5, 4, 2), weight=1, level=9,loadbear=100, updown=True, color='brown'))
 
 # calculate packing 
 packer.pack(
@@ -31,6 +36,9 @@ packer.pack(
     support_surface_ratio=0.75,
     number_of_decimals=0
 )
+
+# put order
+packer.putOrder()
 
 # print result
 b = packer.bins[0]
