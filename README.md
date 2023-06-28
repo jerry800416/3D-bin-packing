@@ -84,7 +84,7 @@
       1. distribute_items=True , put the items into the box in order, if the box is full, the remaining items will continue to be loaded into the next box until all the boxes are full or all the items are packed.
       2. distribute_items=False, compare the packaging of all boxes, that is to say, each box packs all items, not the remaining items.
     
-    img |  distribute_items | !distribute_items
+    img |  distribute_items | ! distribute_items
     :-------------------------:|:-------------------------:|:-------------------------:
     Bin1 | <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/8.JPG" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/8.JPG" width="400"/> 
     Bin2 | <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/9.JPG" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/10.JPG" width="400"/> 
@@ -92,7 +92,7 @@
 
 ## How to use
 
-Init bin : 
+**Init bin :** 
 ```python
 box1 = Bin(
     partno='Bin',         # partno / PN of item (unique value)
@@ -102,7 +102,7 @@ box1 = Bin(
     put_type= 1           # add the order of placing items
 )
 ```
-Init item : 
+**Init item :** 
 ```python
 item1 = Item(
     partno='testItem', # partno / PN of item (unique value)
@@ -116,16 +116,16 @@ item1 = Item(
     color='#FFFF37'    # set item color , you also can use color='red' or color='r'
 )
 ```
-Init packer : 
+**Init packer :**
 ```python
 packer = Packer()          # packer init
 ```
-Add bin and items to packer : (Warning : You can only add one bin,but you can add many items.)
+**Add bin and items to packer : ~~(Warning : You can only add one bin,but you can add many items.)~~ Now you can add multiple bins/boxes.**
 ```python
 packer.addBin(box1)       # adding bins to packer
 packer.addItem(item1)     # adding items to packer
 ```
-Start pack items : 
+**Start pack items :** 
 ```python
 packer.pack(
     bigger_first=True,                 # bigger item first.
@@ -137,7 +137,7 @@ packer.pack(
     number_of_decimals=0
 )
 ```
-After packing:
+**After packing:**
 ```python
 packer.bins              # get bin of packer
 packer.bin[i].items      # get fitted items in bin
@@ -215,9 +215,9 @@ fig.show()
 ## Issue
 * Optimizing using GA or PSO...
 
+
 ## Bug
 * Make set of items funcn crash.
-
 
 
 ## History 
