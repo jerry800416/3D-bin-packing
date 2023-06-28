@@ -84,7 +84,7 @@
       1. distribute_items=True , put the items into the box in order, if the box is full, the remaining items will continue to be loaded into the next box until all the boxes are full or all the items are packed.
       2. distribute_items=False, compare the packaging of all boxes, that is to say, each box packs all items, not the remaining items.
     
-    - |  distribute_items | !distribute_items
+    img |  distribute_items | !distribute_items
     :-------------------------:|:-------------------------:|:-------------------------:
     Bin1 | <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/8.JPG" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/8.JPG" width="400"/> 
     Bin2 | <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/9.JPG" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/10.JPG" width="400"/> 
