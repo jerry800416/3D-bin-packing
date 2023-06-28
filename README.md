@@ -120,7 +120,7 @@ item1 = Item(
 ```python
 packer = Packer()          # packer init
 ```
-**Add bin and items to packer : ~~(Warning : You can only add one bin,but you can add many items.)~~ Now you can add multiple bins/boxes.**
+**Add bin and items to packer : ~~(Warning : You can only add one bin,but you can add many items.)~~ Now you can add multiple bins/boxes,plz check example7.**
 ```python
 packer.addBin(box1)       # adding bins to packer
 packer.addItem(item1)     # adding items to packer
