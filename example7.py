@@ -81,7 +81,12 @@ for idx,b in enumerate(packer.bins) :
     print("***************************************************")
     # draw results
     painter = Painter(b)
-    fig = painter.plotBoxAndItems(title=b.partno)
+    fig = painter.plotBoxAndItems(
+        title=b.partno,
+        alpha=0.8,
+        write_num=False,
+        fontsize=10
+    )
 
 print("***************************************************")
 print("UNFITTED ITEMS:")

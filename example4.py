@@ -144,5 +144,10 @@ for box in packer.bins:
 
     # draw results
     painter = Painter(box)
-    fig = painter.plotBoxAndItems(title=box.partno)
+    fig = painter.plotBoxAndItems(
+        title=box.partno,
+        alpha=0.2,
+        write_num=False,
+        fontsize=6
+    )
 fig.show()

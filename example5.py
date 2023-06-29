@@ -74,6 +74,11 @@ for b in packer.bins:
 
     # draw results
     painter = Painter(b)
-    fig = painter.plotBoxAndItems(title=b.partno)
+    fig = painter.plotBoxAndItems(
+        title=b.partno,
+        alpha=0.8,
+        write_num=False,
+        fontsize=10
+    )
 
 fig.show()

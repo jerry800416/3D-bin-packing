@@ -614,7 +614,7 @@ class Painter:
         self.depth = bins.depth
 
 
-    def _plotCube(self, ax, x, y, z, dx, dy, dz, color='red',mode=2,linewidth=1):
+    def _plotCube(self, ax, x, y, z, dx, dy, dz, color='red',mode=2,linewidth=1,text="",fontsize=15,alpha=0.5):
         """ Auxiliary function to plot a cube. code taken somewhere from the web.  """
         xx = [x, x, x+dx, x+dx, x]
         yy = [y, y+dy, y+dy, y, y]
@@ -628,12 +628,12 @@ class Painter:
             ax.plot3D([x+dx, x+dx], [y+dy, y+dy], [z, z+dz], **kwargs)
             ax.plot3D([x+dx, x+dx], [y, y], [z, z+dz], **kwargs)
         else :
-            p = Rectangle((x,y),dx,dy,fc=color,ec='black',alpha = .8)
-            p2 = Rectangle((x,y),dx,dy,fc=color,ec='black',alpha = .8)
-            p3 = Rectangle((y,z),dy,dz,fc=color,ec='black',alpha = .8)
-            p4 = Rectangle((y,z),dy,dz,fc=color,ec='black',alpha = .8)
-            p5 = Rectangle((x,z),dx,dz,fc=color,ec='black',alpha = .8)
-            p6 = Rectangle((x,z),dx,dz,fc=color,ec='black',alpha = .8)
+            p = Rectangle((x,y),dx,dy,fc=color,ec='black',alpha = alpha)
+            p2 = Rectangle((x,y),dx,dy,fc=color,ec='black',alpha = alpha)
+            p3 = Rectangle((y,z),dy,dz,fc=color,ec='black',alpha = alpha)
+            p4 = Rectangle((y,z),dy,dz,fc=color,ec='black',alpha = alpha)
+            p5 = Rectangle((x,z),dx,dz,fc=color,ec='black',alpha = alpha)
+            p6 = Rectangle((x,z),dx,dz,fc=color,ec='black',alpha = alpha)
             ax.add_patch(p)
             ax.add_patch(p2)
             ax.add_patch(p3)
@@ -641,10 +641,8 @@ class Painter:
             ax.add_patch(p5)
             ax.add_patch(p6)
             
-            rx, ry = p.get_xy()
-            cx = rx + p.get_width()/2.0
-            cy = ry + p.get_height()/2.0
-            ax.annotate("Rectangle", (cx, cy), color='black', weight='bold', fontsize=10, ha='center', va='center')
+            if text != "":
+                ax.text( (x+ dx/2), (y+ dy/2), (z+ dz/2), str(text),color='black', fontsize=fontsize, ha='center', va='center')
 
             art3d.pathpatch_2d_to_3d(p, z=z, zdir="z")
             art3d.pathpatch_2d_to_3d(p2, z=z+dz, zdir="z")
@@ -654,32 +652,33 @@ class Painter:
             art3d.pathpatch_2d_to_3d(p6, z=y + dy, zdir="y")
 
 
-    def _plotCylinder(self, ax, x, y, z, dx, dy, dz, color='red',mode=2):
+    def _plotCylinder(self, ax, x, y, z, dx, dy, dz, color='red',mode=2,text="",fontsize=10,alpha=0.2):
         """ Auxiliary function to plot a Cylinder  """
         # plot the two circles above and below the cylinder
-        p = Circle((x+dx/2,y+dy/2),radius=dx/2,color=color,ec='black')
-        p2 = Circle((x+dx/2,y+dy/2),radius=dx/2,color=color,ec='black')
+        p = Circle((x+dx/2,y+dy/2),radius=dx/2,color=color,alpha=0.5)
+        p2 = Circle((x+dx/2,y+dy/2),radius=dx/2,color=color,alpha=0.5)
         ax.add_patch(p)
         ax.add_patch(p2)
         art3d.pathpatch_2d_to_3d(p, z=z, zdir="z")
         art3d.pathpatch_2d_to_3d(p2, z=z+dz, zdir="z")
         # plot a circle in the middle of the cylinder
-        center_z = np.linspace(0, dz, 15)
-        theta = np.linspace(0, 2*np.pi, 15)
+        center_z = np.linspace(0, dz, 10)
+        theta = np.linspace(0, 2*np.pi, 10)
         theta_grid, z_grid=np.meshgrid(theta, center_z)
         x_grid = dx / 2 * np.cos(theta_grid) + x + dx / 2
         y_grid = dy / 2 * np.sin(theta_grid) + y + dy / 2
         z_grid = z_grid + z
-        ax.plot_surface(x_grid, y_grid, z_grid,shade=False,fc=color,ec='black',alpha=1,color=color)
-        
+        ax.plot_surface(x_grid, y_grid, z_grid,shade=False,fc=color,alpha=alpha,color=color)
+        if text != "" :
+            ax.text( (x+ dx/2), (y+ dy/2), (z+ dz/2), str(text),color='black', fontsize=fontsize, ha='center', va='center')
 
-    def plotBoxAndItems(self,title=""):
+    def plotBoxAndItems(self,title="",alpha=0.2,write_num=False,fontsize=10):
         """ side effective. Plot the Bin and the items it contains. """
         fig = plt.figure()
         axGlob = plt.axes(projection='3d')
         
         # plot bin 
-        self._plotCube(axGlob,0, 0, 0, float(self.width), float(self.height), float(self.depth),color='black',mode=1,linewidth=2)
+        self._plotCube(axGlob,0, 0, 0, float(self.width), float(self.height), float(self.depth),color='black',mode=1,linewidth=2,text="")
 
         counter = 0
         # fit rotation type
@@ -688,12 +687,14 @@ class Painter:
             x,y,z = item.position
             [w,h,d] = item.getDimension()
             color = item.color
+            text= item.partno if write_num else ""
+
             if item.typeof == 'cube':
                  # plot item of cube
-                self._plotCube(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
+                self._plotCube(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2,text=text,fontsize=fontsize,alpha=alpha)
             elif item.typeof == 'cylinder':
                 # plot item of cylinder
-                self._plotCylinder(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2)
+                self._plotCylinder(axGlob, float(x), float(y), float(z), float(w),float(h),float(d),color=color,mode=2,text=text,fontsize=fontsize,alpha=alpha)
             
             counter = counter + 1  
 

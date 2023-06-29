@@ -96,5 +96,10 @@ print('used time : ',stop - start)
 
 # draw results
 painter = Painter(b)
-fig = painter.plotBoxAndItems(title=b.partno)
+fig = painter.plotBoxAndItems(
+    title=b.partno,
+    alpha=0.8,
+    write_num=False,
+    fontsize=10
+)
 fig.show()

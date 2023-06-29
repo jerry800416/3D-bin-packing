@@ -89,6 +89,11 @@
     Bin1 | <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/8.JPG" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/8.JPG" width="400"/> 
     Bin2 | <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/9.JPG" width="400"/>  |  <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/10.JPG" width="400"/> 
 
+13. **Write part number on item :**
+    * Check **Painting** in [how to use](#how-to-use).
+    * In order to better distinguish each item, I write part no in the middle of the item, but if I do this, it will be blocked by the color, so it is best to set the alpha value to about 0.2.
+
+    <img src="https://github.com/jerry800416/3dbinpacking/blob/master/img/11.jpeg" width="600"/>
 
 ## How to use
 
@@ -102,6 +107,7 @@ box1 = Bin(
     put_type= 1           # add the order of placing items
 )
 ```
+
 **Init item :** 
 ```python
 item1 = Item(
@@ -116,15 +122,18 @@ item1 = Item(
     color='#FFFF37'    # set item color , you also can use color='red' or color='r'
 )
 ```
+
 **Init packer :**
 ```python
 packer = Packer()          # packer init
 ```
+
 **Add bin and items to packer : ~~(Warning : You can only add one bin,but you can add many items.)~~ Now you can add multiple bins/boxes,plz check example7.**
 ```python
 packer.addBin(box1)       # adding bins to packer
 packer.addItem(item1)     # adding items to packer
 ```
+
 **Start pack items :** 
 ```python
 packer.pack(
@@ -137,11 +146,25 @@ packer.pack(
     number_of_decimals=0
 )
 ```
-**After packing:**
+
+**Results :**
 ```python
 packer.bins              # get bin of packer
 packer.bin[i].items      # get fitted items in bin
 packer.unfit_items       # get unfitted items 
+```
+
+**Painting :**
+```python
+for b in packer :
+    painter = Painter(b)
+    fig = painter.plotBoxAndItems(
+        title=b.partno,
+        alpha=0.2,         # set item alpha
+        write_num=True,    # open/close write part number 
+        fontsize=10        # control write_num fontsize
+    )
+fig.show() 
 ```
 
 ## Example
@@ -180,7 +203,12 @@ packer.pack(
 # paint the results
 for b in packer :
     painter = Painter(b)
-    fig = painter.plotBoxAndItems(title=b.partno)
+    fig = painter.plotBoxAndItems(
+        title=b.partno,
+        alpha=0.2,         
+        write_num=True,   
+        fontsize=10        
+    )
 fig.show()
 ```
 #### example0
@@ -223,8 +251,9 @@ fig.show()
 ## History 
 
 * 20230621 Add a rule to check item stability.
-* 20230621 Fix the problem that there can only creat one bin.
+* 20230621 Fix issue : there can only creat one bin.
 * 20230628 Modify `Readme.md`.
+* 20230629 Fix issue : can not write anything on cube.
 
 ## Reference
 
