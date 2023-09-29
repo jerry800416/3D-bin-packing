@@ -538,7 +538,10 @@ class Packer:
         r = [area[0][2],area[1][2],area[2][2],area[3][2]]
         result = []
         for i in r :
-            result.append(round(i / sum(r) * 100,2))
+            try:
+                result.append(round(i / sum(r) * 100,2))
+            except ZeroDivisionError:
+                result.append(0)
         return result
 
 
