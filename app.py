@@ -3,10 +3,14 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import random
 import csv
+from PIL import Image
 
-st.set_page_config(page_title="Streamlit App", page_icon=":smiley:")
+st.set_page_config(page_title="Streamlit App", page_icon=":smiley:", layout="wide")
+col1, col2 = st.columns((1,2))
+with col1:
+    st.title("Codesprint 3D Bin Packer")
+    uploaded_file = st.file_uploader("Choose a file")
 
-uploaded_file = st.file_uploader("Choose a file")
 
 
 COLORS = ["yellow", "olive", "pink", "brown", "red",
@@ -50,7 +54,7 @@ if uploaded_file is not None:
     packer = Packer()
     #  init bin
     for i in range(len(bins)):
-        box = Bin('Bin{}'.format(str(i+1)), bins[i], 100, 0, 0)
+        box = Bin('Container {}'.format(str(i+1)), bins[i], 100, 0, 0)
         packer.addBin(box)
 
     #  add item
@@ -80,30 +84,50 @@ if uploaded_file is not None:
 
     # put order
     packer.putOrder()
+    with col1:
+        st.title("Packing information:")
 
-    output = "***************************************************\n"
+    # output = "***************************************************\n"
+    # output = ''
     for idx, b in enumerate(packer.bins):
-        output += f"** {b.string()} **\n"
-        output += "***************************************************\n"
-        output += "FITTED ITEMS:\n"
-        output += "***************************************************\n"
+        # output += f"** {b.string()} **\n"
+        with col1:
+            st.header(f"{b.string()} \n")
+        # output = f"{b.string()} \n"
+        # output += "***************************************************\n"
+        with col1:
+            st.subheader("FITTED ITEMS")
+        output = ""
+        # output += "***************************************************\n"
         volume = b.width * b.height * b.depth
         volume_t = 0
         volume_f = 0
         unfitted_name = ''
         for item in b.items:
-            output += f"partno : {item.partno}\n"
-            output += f"position : {item.position}\n"
-            output += f"W*H*D : {item.width} * {item.height} * {item.depth}\n"
-            output += f"volume : {float(item.width) * float(item.height) * float(item.depth)}\n"
+            output = f"partno : {item.partno}\n"
+            with col1:
+                st.write(output)
+            output = f"position : {item.position}\n"
+            with col1:
+                st.write(output)
+            output = f"W*H*D : {item.width} * {item.height} * {item.depth}\n"
+            with col1:
+                st.write(output)
+            output = f"volume : {float(item.width) * float(item.height) * float(item.depth)}\n"
+            with col1:
+                st.write(output)
             volume_t += float(item.width) * \
                 float(item.height) * float(item.depth)
-            output += "***************************************************\n"
+            output = "***************************************************\n"
+            with col1:
+                st.write(output)
 
-        output += f'space utilization : {round(volume_t / float(volume) * 100, 2)}%\n'
+        output = f'space utilization : {round(volume_t / float(volume) * 100, 2)}%\n'
         output += f'residual volume : {float(volume) - volume_t}\n'
-        output += "***************************************************\n"
+        # output += "***************************************************\n"
         # draw results
+        with col1:
+            st.markdown(output)
         painter = Painter(b)
         fig = painter.plotBoxAndItems(
             title=b.partno,
@@ -111,24 +135,31 @@ if uploaded_file is not None:
             write_num=False,
             fontsize=10
         )
+        
+        with col2:
+            fig_name = "fig{index}.png".format(index=idx)
+            fig.savefig(fig_name)
+            st.image(Image.open(fig_name))
 
     output += "***************************************************\n"
-    output += "UNFITTED ITEMS:\n"
+    output = "UNFITTED ITEMS:\n"
     for item in packer.unfit_items:
-        output += "***************************************************\n"
+        # output += "***************************************************\n"
         output += f"partno : {item.partno}\n"
         output += f"W*H*D : {item.width} * {item.height} * {item.depth}\n"
         output += f"volume : {float(item.width) * float(item.height) * float(item.depth)}\n"
         volume_f += float(item.width) * \
             float(item.height) * float(item.depth)
         unfitted_name += f'{item.partno},'
-        output += "***************************************************\n"
-    output += "***************************************************\n"
+    #     output += "***************************************************\n"
+    # output += "***************************************************\n"
     output += f'unpacked items : {unfitted_name}\n'
     output += f'unpacked items volume : {volume_f}\n'
+    with col1:
+        st.write(output)
 
     # Print the entire output
-    print(output)
-
-    st.title("Streamlit App")
-    st.pyplot(fig)
+    # print(output)
+    # st.title("Packing information:")
+    # st.text(output)
+    #st.pyplot(fig)

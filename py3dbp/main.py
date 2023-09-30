@@ -117,12 +117,14 @@ class Bin:
         self.number_of_decimals = number_of_decimals
 
 
+    # def string(self):
+    #     ''' '''
+    #     return "%s(%sx%sx%s, max_weight:%s) vol(%s)" % (
+    #         self.partno, self.width, self.height, self.depth, self.max_weight,
+    #         self.getVolume()
+    #     )
     def string(self):
-        ''' '''
-        return "%s(%sx%sx%s, max_weight:%s) vol(%s)" % (
-            self.partno, self.width, self.height, self.depth, self.max_weight,
-            self.getVolume()
-        )
+        return self.partno
 
 
     def getVolume(self):
