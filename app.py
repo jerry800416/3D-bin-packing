@@ -4,12 +4,14 @@ import matplotlib.pyplot as plt
 import random
 import csv
 from PIL import Image
+import subprocess
 
 st.set_page_config(page_title="Streamlit App", page_icon=":smiley:", layout="wide")
 col1, col2 = st.columns((1,2))
 with col1:
     st.title("Codesprint 3D Bin Packer")
     uploaded_file = st.file_uploader("Choose a file")
+
 
 
 
@@ -82,6 +84,8 @@ if uploaded_file is not None:
         number_of_decimals=0
     )
 
+
+
     # put order
     packer.putOrder()
     with col1:
@@ -135,11 +139,13 @@ if uploaded_file is not None:
             write_num=False,
             fontsize=10
         )
+
         
         with col2:
             fig_name = "fig{index}.png".format(index=idx)
             fig.savefig(fig_name)
             st.image(Image.open(fig_name))
+
 
     output += "***************************************************\n"
     output = "UNFITTED ITEMS:\n"
@@ -158,8 +164,10 @@ if uploaded_file is not None:
     with col1:
         st.write(output)
 
+
     # Print the entire output
     # print(output)
     # st.title("Packing information:")
     # st.text(output)
     #st.pyplot(fig)
+
