@@ -2,4 +2,4 @@
 numpy == 1.19.5
 matplotlib == 3.3.4
 Flask==2.2.5
-Flask-Cors==3.0.10
+Flask-Cors==5.0.0
