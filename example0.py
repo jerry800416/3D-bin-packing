@@ -14,7 +14,7 @@ packer = Packer()
 # Evergreen Real Container (20ft Steel Dry Cargo Container)
 # Unit cm/kg
 box = Bin(
-    partno='example0',
+    bin_id='example0',
     WHD=(589.8,243.8,259.1),
     max_weight=28080,
     corner=15,
@@ -27,12 +27,11 @@ packer.addBin(box)
 # 64 pcs per case ,  82 * 46 * 170 (85.12)
 for i in range(5): 
     packer.addItem(Item(
-        partno='Dyson DC34 Animal{}'.format(str(i+1)),
-        name='Dyson', 
+        item_id='Dyson DC34 Animal',
         typeof='cube',
         WHD=(170, 82, 46), 
         weight=85.12,
-        level=1,
+        priority_level=1,
         loadbear=100,
         updown=True,
         color='#FF0000')
@@ -42,12 +41,11 @@ for i in range(5):
 # 1 pcs per case, 85 * 60 *60 (10)
 for i in range(10):
     packer.addItem(Item(
-        partno='wash{}'.format(str(i+1)),
-        name='wash',
+        item_id='washing machine',
         typeof='cube',
         WHD=(85, 60, 60), 
         weight=10,
-        level=1,
+        priority_level=1,
         loadbear=100,
         updown=True,
         color='#FFFF37'
@@ -57,12 +55,11 @@ for i in range(10):
 # one per box, 60 * 80 * 200 (80)
 for i in range(5):
     packer.addItem(Item(
-        partno='Cabinet{}'.format(str(i+1)),
-        name='cabint',
+        item_id='Cabinet',
         typeof='cube',
         WHD=(60, 80, 200), 
         weight=80,
-        level=1,
+        priority_level=1,
         loadbear=100,
         updown=True,
         color='#842B00')
@@ -72,12 +69,11 @@ for i in range(5):
 # one per box , 70 * 100 * 30 (20)
 for i in range(10):
     packer.addItem(Item(
-        partno='Server{}'.format(str(i+1)),
-        name='server',
+        item_id='Server',
         typeof='cube',
         WHD=(70, 100, 30), 
         weight=20,
-        level=1,
+        priority_level=1,
         loadbear=100,
         updown=True,
         color='#0000E3')
@@ -88,7 +84,7 @@ for i in range(10):
 packer.pack(
     bigger_first=True,
     distribute_items=False,
-    fix_point=False, # Try switching fix_point=True/False to compare the results
+    fix_point=True, # Try switching fix_point=True/False to compare the results
     check_stable=False,
     support_surface_ratio=0.75,
     number_of_decimals=0
@@ -107,8 +103,8 @@ for box in packer.bins:
 
     # '''
     for item in box.items:
-        print("partno : ",item.partno)
-        print("type : ",item.name)
+        print("item_id : ",item.item_id)
+        print("type : ",item.item_name)
         print("color : ",item.color)
         print("position : ",item.position)
         print("rotation type : ",item.rotation_type)
@@ -121,14 +117,14 @@ for box in packer.bins:
     # '''
     print("UNFITTED ITEMS:")
     for item in box.unfitted_items:
-        print("partno : ",item.partno)
-        print("type : ",item.name)
+        print("item_id : ",item.item_id)
+        print("type : ",item.item_name)
         print("color : ",item.color)
         print("W*H*D : ",str(item.width) +'*'+ str(item.height) +'*'+ str(item.depth))
         print("volume : ",float(item.width) * float(item.height) * float(item.depth))
         print("weight : ",float(item.weight))
         volume_f += float(item.width) * float(item.height) * float(item.depth)
-        unfitted_name += '{},'.format(item.partno)
+        unfitted_name += '{},'.format(item.item_id)
         print("***************************************************")
     print("***************************************************")
     print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2)))
@@ -143,9 +139,8 @@ for box in packer.bins:
     # draw results
     painter = Painter(box)
     fig = painter.plotBoxAndItems(
-        title=box.partno,
+        title=box.bin_id,
         alpha=0.2,
-        write_num=True,
+        write_name=True,
         fontsize=10
     )
-fig.show()

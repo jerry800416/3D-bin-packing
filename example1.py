@@ -9,24 +9,24 @@ This example is used to demonstrate the mixed packing of cube and cylinder.
 '''
 
 # init packing function
-packer = Packer()
-#  init bin
-box = Bin('example1', (5.6875, 10.75, 15.0), 70.0,0,0)
+packer = Packer(packer_id='Example Packer')
+# init bin
+box = Bin(WHD=(5.6875, 8, 10.0), max_weight=700.0, bin_id='example1')
 packer.addBin(box)
-#  add item
-packer.addItem(Item('50g [powder 1]', 'test','cube',(2, 2, 4), 1,1,100,True,'red'))
-packer.addItem(Item('50g [powder 2]', 'test','cube',(2, 2, 4), 2,1,100,True,'blue'))
-packer.addItem(Item('50g [powder 3]', 'test','cube',(2, 2, 4), 3,1,100,True,'gray'))
-packer.addItem(Item('50g [powder 4]', 'test','cube',(2, 2, 4), 3,1,100,True,'orange'))
-packer.addItem(Item('50g [powder 5]', 'test','cylinder',(2, 2, 4), 3,1,100,True,'lawngreen'))
-packer.addItem(Item('50g [powder 6]', 'test','cylinder',(2, 2, 4), 3,1,100,True,'purple'))
-packer.addItem(Item('50g [powder 7]', 'test','cylinder',(1, 1, 5), 3,1,100,True,'yellow'))
-packer.addItem(Item('250g [powder 8]', 'test','cylinder',(4, 4, 2), 4,1,100,True,'pink'))
-packer.addItem(Item('250g [powder 9]', 'test','cylinder',(4, 4, 2), 5,1,100,True,'brown'))
-packer.addItem(Item('250g [powder 10]', 'test','cube',(4, 4, 2), 6,1,100,True,'cyan'))
-packer.addItem(Item('250g [powder 11]', 'test','cylinder',(4, 4, 2), 7,1,100,True,'olive'))
-packer.addItem(Item('250g [powder 12]', 'test','cylinder',(4, 4, 2), 8,1,100,True,'darkgreen'))
-packer.addItem(Item('250g [powder 13]', 'test','cube',(4, 4, 2), 9,1,100,True,'orange'))
+# add items
+packer.addItem(Item(WHD=(2, 2, 4), weight=10, priority_level=1, updown=True, color='red', loadbear=7.5, item_id='10kg/7.5kg/Prio1', item_name='test', typeof='cube'))
+packer.addItem(Item(WHD=(2, 2, 4), weight=8, priority_level=1, updown=True, color='blue', loadbear=7.5, item_id='8kg/7.5kg/Prio1', item_name='test', typeof='cube'))
+packer.addItem(Item(WHD=(2, 2, 4), weight=8, priority_level=2, updown=True, color='gray', loadbear=4, item_id='8kg/4kg/Prio2', item_name='test', typeof='cube'))
+packer.addItem(Item(WHD=(2, 2, 3), weight=3.5, priority_level=1, updown=True, color='orange', loadbear=2, item_id='3.5kg/2kg/Prio1', item_name='test', typeof='cube'))
+packer.addItem(Item(WHD=(3, 2, 4), weight=9, priority_level=1, updown=True, color='lawngreen', loadbear=8, item_id='9kg/8kg/Prio1', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(3, 2, 4), weight=8, priority_level=2, updown=True, color='purple', loadbear=8, item_id='8kg/8kg/Prio2', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(3, 1, 5), weight=9, priority_level=1, updown=True, color='yellow', loadbear=8, item_id='9kg/8kg/Prio1', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(4, 4, 2), weight=3, priority_level=1, updown=True, color='pink', loadbear=2, item_id='3kg/2kg/Prio1', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(4, 4, 2), weight=3, priority_level=1, updown=True, color='brown', loadbear=2.5, item_id='3kg/2.5kg/Prio1', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(4, 4, 2), weight=11, priority_level=1, updown=True, color='cyan', loadbear=10, item_id='11kg/10kg/Prio1', item_name='test', typeof='cube'))
+packer.addItem(Item(WHD=(2, 2, 2), weight=1.5, priority_level=1, updown=True, color='olive', loadbear=1.5, item_id='1.5kg/1.5kg/Prio1', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(2, 2, 1), weight=2, priority_level=1, updown=True, color='darkgreen', loadbear=2, item_id='2kg/2kg/Prio1', item_name='test', typeof='cylinder'))
+packer.addItem(Item(WHD=(5, 2, 2), weight=2.5, priority_level=1, updown=True, color='orange', loadbear=1, item_id='2.5kg/1kg/Prio1', item_name='test', typeof='cube'))
 
 # calculate packing 
 packer.pack(
@@ -48,41 +48,40 @@ volume_t = 0
 volume_f = 0
 unfitted_name = ''
 for item in b.items:
-    print("partno : ",item.partno)
-    print("color : ",item.color)
-    print("position : ",item.position)
-    print("rotation type : ",item.rotation_type)
-    print("W*H*D : ",str(item.width) +'*'+ str(item.height) +'*'+ str(item.depth))
-    print("volume : ",float(item.width) * float(item.height) * float(item.depth))
-    print("weight : ",float(item.weight))
+    print("item_id : ", item.item_id)
+    print("color : ", item.color)
+    print("position : ", item.position)
+    print("rotation type : ", item.rotation_type)
+    print("W*H*D : ", str(item.width) + '*' + str(item.height) + '*' + str(item.depth))
+    print("volume : ", float(item.width) * float(item.height) * float(item.depth))
+    print("weight : ", float(item.weight))
     volume_t += float(item.width) * float(item.height) * float(item.depth)
     print("***************************************************")
 print("***************************************************")
 print("UNFITTED ITEMS:")
 for item in b.unfitted_items:
-    print("partno : ",item.partno)
-    print("color : ",item.color)
-    print("W*H*D : ",str(item.width) +'*'+ str(item.height) +'*'+ str(item.depth))
-    print("volume : ",float(item.width) * float(item.height) * float(item.depth))
-    print("weight : ",float(item.weight))
+    print("item_id : ", item.item_id)
+    print("color : ", item.color)
+    print("W*H*D : ", str(item.width) + '*' + str(item.height) + '*' + str(item.depth))
+    print("volume : ", float(item.width) * float(item.height) * float(item.depth))
+    print("weight : ", float(item.weight))
     volume_f += float(item.width) * float(item.height) * float(item.depth)
-    unfitted_name += '{},'.format(item.partno)
+    unfitted_name += '{},'.format(item.item_id)
     print("***************************************************")
 print("***************************************************")
-print('space utilization : {}%'.format(round(volume_t / float(volume) * 100 ,2)))
-print('residual volumn : ', float(volume) - volume_t )
-print('unpack item : ',unfitted_name)
-print('unpack item volumn : ',volume_f)
-print("gravity distribution : ",b.gravity)
+print('space utilization : {}%'.format(round(volume_t / float(volume) * 100, 2)))
+print('residual volume : ', float(volume) - volume_t)
+print('unpack item : ', unfitted_name)
+print('unpack item volume : ', volume_f)
+print("gravity distribution : ", b.gravity)
 stop = time.time()
-print('used time : ',stop - start)
+print('used time : ', stop - start)
 
 # draw results
 painter = Painter(b)
 fig = painter.plotBoxAndItems(
-    title=b.partno,
+    title=b.bin_id,
     alpha=0.2,
-    write_num=False,
-    fontsize=5
+    write_name=True,
+    fontsize=10
 )
-fig.show()
