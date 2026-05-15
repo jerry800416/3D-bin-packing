@@ -20,6 +20,7 @@
       - [example5](#example5)
       - [example6](#example6)
       - [example7](#example7)
+      - [example8](#example8)
   - [Issue](#issue)
   - [Bug](#bug)
   - [History](#history)
@@ -238,6 +239,11 @@ fig.show()
 * If you have multiple boxes, you can change `distribute_items` to achieve different packaging purposes.
 * `distribute_items=True` , put the items into the box in order, if the box is full, the remaining items will continue to be loaded into the next box until all the boxes are full  or all the items are packed.
 * `distribute_items=False`, compare the packaging of all boxes, that is to say, each box packs all items, not the remaining items.
+
+#### example8
+* `example8_packrift_ecommerce.py` is a compact ecommerce cartonization example using carton and order dimensions from the public Packrift packaging optimization solver fixtures.
+* It runs without network access and prints the selected Packrift cartons, packed items, and volume utilization.
+* Fixture source: https://packrift.github.io/packaging-optimization-benchmark-corpus/cartonization-solver-fixtures.html
 
 
 ## Issue
